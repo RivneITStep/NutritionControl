@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Threading.Tasks;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -15,8 +12,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Debug;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+
 using NutritionControl.DataAccess;
 using NutritionControl.DataAccess.Configuration;
 using NutritionControl.DataAccess.Entities;
@@ -50,6 +47,8 @@ namespace NutritionControl.API
             services.AddScoped<DbContext, ApplicationContext>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<ITestProductsService, TestProductService>();
+            services.AddScoped<IJwtService, JwtService>();
+            services.AddScoped<IAuthService, AuthService>();
 
             services.AddIdentity<User, IdentityRole<int>>(opts =>
             {
@@ -85,10 +84,10 @@ namespace NutritionControl.API
                     };
                 });
 
-            services.AddSpaStaticFiles(configuration =>
-            {
-                configuration.RootPath = "../NutritionControl.Client/client-app/dist/";
-            });
+            //services.AddSpaStaticFiles(configuration =>
+            //{
+            //    configuration.RootPath = "../NutritionControl.Client/client-app/dist/";
+            //});
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -108,19 +107,19 @@ namespace NutritionControl.API
                 app.UseHsts();
             }
 
-            app.UseSpaStaticFiles();
+            //app.UseSpaStaticFiles();
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "../NutritionControl.Client/client-app/";
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-            });
+            //app.UseSpa(spa =>
+            //{
+            //    spa.Options.SourcePath = "../NutritionControl.Client/client-app/";
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseAngularCliServer(npmScript: "start");
+            //    }
+            //});
 
         }
     }

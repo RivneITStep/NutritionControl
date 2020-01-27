@@ -1,45 +1,76 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using NutritionControl.DataAccess.Entities;
 using NutritionControl.Domain.Services.Interfaces;
 using NutritionControl.DTO.DtoResults;
 using NutritionControl.DTO.Models.Auth;
-using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace NutritionControl.Domain.Services.Implementation
 {
     public class AuthService : IAuthService
     {
-        private readonly IConfiguration _configuration;
-        //private readonly SignInManager<User> _signInManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
-    
+        private readonly IJwtService _jwtService;
+
         public AuthService(UserManager<User> userManager,
-                                IConfiguration configuration)
+                           IJwtService jwtService,
+                           SignInManager<User> signInManager)
         {
             _userManager = userManager;
-            _configuration = configuration;
+            _jwtService = jwtService;
+            _signInManager = signInManager;
         }
 
-        public Task<ResultDto> Login(LoginDto entity)
+        public async Task<ResultDto> Login(LoginDto model)
         {
-            throw new NotImplementedException();
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.IsRemember, false);
+            if (result.Succeeded)
+            {
+                var user = _userManager.Users.FirstOrDefault(r => r.Email == model.Email);
+                var token = _jwtService.GenerateJwtToken(model.Email, user.Id);
+                return new SingleResultDto<string>
+                {
+                    Data = token,
+                    IsSuccessful = true,
+                    Message = ""
+                };
+            }
+            return new ResultDto
+            {
+                IsSuccessful = false,
+                Message = "Wrong Email or Password"
+            };
         }
 
         public async Task<ResultDto> Register(RegisterDto model)
         {
-            //var user = new User
-            //{
-            //    Email = model.Email,
-            //    UserName = model.Email
-            //};
-            //var result = await _userManager.CreateAsync(user, model.Password);
-            //if (result.Succeeded)
-            //{
-            //    return await Login(new LoginDto { Email = model.Email, IsRemember = false, Password = model.Password });
-            //}
-            return null;
+            var user = new User
+            {
+                Email = model.Email,
+                UserName = model.Email
+            };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                return new ResultDto
+                {
+                    IsSuccessful = true,
+                    Message = "User was succesfully registered"
+                };
+            }
+            return new ResultDto
+            {
+                IsSuccessful = false,
+                Message = AggregateIdentityErrors(result.Errors)
+            };
+        }
+
+        private string AggregateIdentityErrors(IEnumerable<IdentityError> identityErrors)
+        {
+            return identityErrors.Select(x => x.Code.ToString() + " " + x.Description + "\n").Aggregate((x, y) => x + y);
         }
     }
 }
