@@ -31,9 +31,15 @@ namespace NutritionControl.Domain.Services.Implementation
             {
                 var user = _userManager.Users.FirstOrDefault(r => r.Email == model.Email);
                 var token = _jwtService.GenerateJwtToken(model.Email, user.Id);
-                return new SingleResultDto<string>
+                var refreshToken = await _jwtService.GenerateRefreshToken(user.Id);
+
+                return new SingleResultDto<LoginResult>
                 {
-                    Data = token,
+                    Data = new LoginResult
+                    {
+                        AccessToken = token,
+                        RefreshToken = refreshToken
+                    },
                     IsSuccessful = true,
                     Message = ""
                 };
@@ -50,7 +56,7 @@ namespace NutritionControl.Domain.Services.Implementation
             var user = new User
             {
                 Email = model.Email,
-                UserName = model.Email
+                UserName = model.Email,
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)

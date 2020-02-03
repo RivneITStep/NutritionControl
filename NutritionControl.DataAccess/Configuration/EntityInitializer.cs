@@ -3,9 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using NutritionControl.DataAccess.Configuration.TypeInitializers;
 using NutritionControl.DataAccess.Entities;
 using NutritionControl.DataAccess.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace NutritionControl.DataAccess.Configuration

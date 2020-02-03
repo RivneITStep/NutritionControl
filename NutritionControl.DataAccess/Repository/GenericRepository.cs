@@ -99,6 +99,11 @@ namespace NutritionControl.DataAccess.Repository
                     current.Include(includeProperty)).Skip(startIndex * count).Take(count).ToListAsync();
         }
 
+        public async Task<TEntity> GetSingle(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await _set.FirstOrDefaultAsync(predicate);
+        }
+
         public async Task Update(TEntity entity)
         {
             _db.Entry(entity).State = EntityState.Modified;

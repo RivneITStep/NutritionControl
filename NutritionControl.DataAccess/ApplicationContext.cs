@@ -17,6 +17,7 @@ namespace NutritionControl.DataAccess
         public DbSet<WeightInfo> WeightInfos { get; set; }
         public DbSet<WaterValue> WaterValues { get; set; }
         public DbSet<FoodIntake> FoodIntakes { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         #endregion
 

@@ -7,7 +7,7 @@ using NutritionControl.DTO.Models.Auth;
 
 namespace NutritionControl.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AuthController : ControllerBase
     { 

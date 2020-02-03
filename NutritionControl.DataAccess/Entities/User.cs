@@ -16,6 +16,8 @@ namespace NutritionControl.DataAccess.Entities
 
         /* Navigation Properties */
 
+        public int? RefreshTokenId { get; set; }
+        public RefreshToken RefreshToken { get; set; }
         public int? UserAdditionalInfoId { get; set; }
         public UserAdditionalInfo UserAdditionalInfo { get; set; }
         public ICollection<WeightInfo> WeightInfos { get; set; }

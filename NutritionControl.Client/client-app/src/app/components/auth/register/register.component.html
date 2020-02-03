@@ -1,4 +1,4 @@
-<form class="splash-container">
+<div class="splash-container">
     <div class="card">
         <div class="card-header">
             <h3 class="mb-1">Registrations Form</h3>
@@ -6,22 +6,18 @@
         </div>
         <div class="card-body">
             <div class="form-group">
-                <input class="form-control form-control-lg" type="text" name="nick" required="" placeholder="Username"
+                <input class="form-control form-control-lg" required [(ngModel)]="model.email" type="email" name="email" required="" placeholder="E-mail"
                     autocomplete="off">
             </div>
             <div class="form-group">
-                <input class="form-control form-control-lg" type="email" name="email" required="" placeholder="E-mail"
-                    autocomplete="off">
-            </div>
-            <div class="form-group">
-                <input class="form-control form-control-lg" id="pass1" type="password" required=""
+                <input class="form-control form-control-lg" required [(ngModel)]="model.password" id="pass1" type="password" required=""
                     placeholder="Password">
             </div>
             <div class="form-group">
-                <input class="form-control form-control-lg" required="" placeholder="Confirm">
+                <input class="form-control form-control-lg" required [(ngModel)]="model.confirmPassword" required="" placeholder="Confirm">
             </div>
             <div class="form-group pt-2">
-                <button class="btn btn-block btn-primary" type="submit">Register My Account</button>
+                <button class="btn btn-block btn-primary" (click)="onRegister()" type="submit">Register My Account</button>
             </div>
             <div class="form-group">
                 <label class="custom-control custom-checkbox">
@@ -39,7 +35,7 @@
             </div>
         </div>
         <div class="card-footer bg-white">
-            <p>Already member? <a href="#" class="text-secondary">Login Here.</a></p>
+            <p>Already member? <a [routerLink]="['/auth/login']" routerLinkActive="router-link-active"  class="text-secondary">Login Here.</a></p>
         </div>
     </div>
-</form>
+</div>
