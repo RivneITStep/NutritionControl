@@ -9,12 +9,13 @@ import { AuthModule } from './components/auth/auth.module';
 import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { ACCESS_TOKEN } from './helpers/config';
 import { AuthGuard } from './guards/auth.guard';
+import { HeaderComponent } from './components/theme/layout/header/header.component';
 
 const routes: Routes = [
   {
     path: '',
     component: MainComponent,
-    canActivate: [AuthGuard]
+    //canActivate: [AuthGuard]
   },
   {
     path: 'auth',
@@ -25,7 +26,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent
+    MainComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

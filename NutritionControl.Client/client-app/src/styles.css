@@ -1,3 +1,11 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 @import 'assets/fonts/circular-std/style.css';
 @import 'assets/css/style.css';
+
+html, body {
+  height: 100%;
+}
+
+.pointer {
+  cursor: pointer;
+}

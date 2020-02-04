@@ -1,0 +1,30 @@
+<div class="header-component">
+  <div class="dashboard-header">
+    <nav class="navbar navbar-expand-lg bg-white fixed-top">
+      <a class="navbar-brand" href="index.html">Nutrition Control</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse " id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto navbar-right-top">
+          <li *ngIf="!isLoggedIn()" class="nav-item">
+            <a class="nav-link" [routerLink]="['auth/login']" routerLinkActive="router-link-active">
+              Login
+            </a>
+          </li>
+          <li *ngIf="!isLoggedIn()" class="nav-item">
+            <a class="nav-link" [routerLink]="['auth/register']" routerLinkActive="router-link-active">
+              Register
+            </a>
+          </li>
+          <li *ngIf="isLoggedIn()" class="nav-item">
+            <a class="nav-link pointer" (click)='onLogout()'>
+              Logout
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
