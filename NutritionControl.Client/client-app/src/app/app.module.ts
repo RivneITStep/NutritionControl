@@ -2,22 +2,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './components/auth/register/register.component';
-import { LoginComponent } from './components/auth/login/login.component';
 import { MainComponent } from './components/theme/main/main.component';
 import { RouterModule, Routes } from '@angular/router'
-import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthModule } from './components/auth/auth.module';
 import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { ACCESS_TOKEN } from './helpers/config';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/auth/login',
-    pathMatch: 'full'
-    //component: MainComponent
+    component: MainComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'auth',

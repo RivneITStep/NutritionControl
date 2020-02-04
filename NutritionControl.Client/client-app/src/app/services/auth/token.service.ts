@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ACCESS_TOKEN } from 'src/app/helpers/config';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from 'src/app/helpers/config';
 
 @Injectable({
   providedIn: 'root'
 })
-export class JwtTokenService {
+export class TokenService {
 
   decodedToken: any = null;
 
@@ -16,18 +16,28 @@ export class JwtTokenService {
     this.decodedToken = this.jwtHelperService.decodeToken(localStorage.getItem(ACCESS_TOKEN));
   }
 
-  isLoggedIn(): boolean {
+  setRefreshToken(refreshToken: string): void {
+    localStorage.setItem(REFRESH_TOKEN, refreshToken);
+  }
+
+  isTokenValid(): boolean {
     const token = this.getToken();
     return (token != null && !this.jwtHelperService.isTokenExpired(token));
   }
 
-  private getToken(): string {
+  getToken(): string {
     return localStorage.getItem(ACCESS_TOKEN);
   }
 
-  private getTokenPayload(): any {
+  getTokenPayload(): any {
     if (this.decodedToken == null)
       this.decodedToken = this.jwtHelperService.decodeToken(localStorage.getItem(ACCESS_TOKEN));
     return this.decodedToken;
   }
+
+  removeToken(): void {
+    localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem(REFRESH_TOKEN);
+  }
+
 }

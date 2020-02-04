@@ -43,6 +43,11 @@ namespace NutritionControl.DataAccess
                 .WithOne(ui => ui.User)
                 .HasForeignKey<UserAdditionalInfo>(ui => ui.UserId);
 
+            modelBuilder.Entity<User>()
+               .HasOne(u => u.RefreshToken)
+               .WithOne(rt => rt.User)
+               .HasForeignKey<RefreshToken>(rt => rt.UserId);
+
 
             base.OnModelCreating(modelBuilder);
         }

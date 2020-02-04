@@ -13,6 +13,29 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutritionControl.API", "Nut
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{6CE13EE0-1ABD-4420-9C53-E1987821903B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{F78EF32C-E7DB-4409-889C-8D4AE93088A5}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "client-app", "NutritionControl.Client\client-app\", "{9250649D-EB93-4AE6-B629-1338D8F590E1}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_64367"
+		Debug.AspNetCompiler.PhysicalPath = "NutritionControl.Client\client-app\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64367\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_64367"
+		Release.AspNetCompiler.PhysicalPath = "NutritionControl.Client\client-app\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_64367\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "64367"
+		SlnRelativePath = "NutritionControl.Client\client-app\"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +58,10 @@ Global
 		{D64FBB92-1654-48C6-AFBE-F0D247C194C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D64FBB92-1654-48C6-AFBE-F0D247C194C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D64FBB92-1654-48C6-AFBE-F0D247C194C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9250649D-EB93-4AE6-B629-1338D8F590E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9250649D-EB93-4AE6-B629-1338D8F590E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9250649D-EB93-4AE6-B629-1338D8F590E1}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{9250649D-EB93-4AE6-B629-1338D8F590E1}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +71,7 @@ Global
 		{565DDE2E-C5BD-47E0-9ABB-8048F711BAC5} = {6CE13EE0-1ABD-4420-9C53-E1987821903B}
 		{E2A2081A-374C-4E3D-8FA1-8506C8A3DB9C} = {6CE13EE0-1ABD-4420-9C53-E1987821903B}
 		{D64FBB92-1654-48C6-AFBE-F0D247C194C1} = {6CE13EE0-1ABD-4420-9C53-E1987821903B}
+		{9250649D-EB93-4AE6-B629-1338D8F590E1} = {F78EF32C-E7DB-4409-889C-8D4AE93088A5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {031950A0-0013-4105-8400-974809D2AB74}
