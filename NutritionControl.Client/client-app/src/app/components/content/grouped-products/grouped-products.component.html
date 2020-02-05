@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-10">
+      <div class="container">
+        <div class="row">
+          <div *ngFor="let group of products" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card" id='{{group.categoryName}}'>
+              <h5 class="card-header">{{group.categoryName}}</h5>
+              <div class="card-body">
+                <table class="table table-striped table-responsive-md">
+                  <thead>
+                    <tr class="d-flex">
+                      <th class="col-1" scope="col">#</th>
+                      <th class="col-3" scope="col">Name</th>
+                      <th class="col-2" scope="col">Calories</th>
+                      <th class="col-2" scope="col">Protein</th>
+                      <th class="col-2" scope="col">Fats</th>
+                      <th class="col-2" scope="col">Carbohydrates</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="d-flex" *ngFor="let product of group.products">
+                      <th class="col-1" scope="row">{{product.id}}</th>
+                      <td class="col-3">{{product.name}}</td>
+                      <td class="col-2">{{product.caloriesValue}}</td>
+                      <td class="col-2">{{product.protein}}</td>
+                      <td class="col-2">{{product.fats}}</td>
+                      <td class="col-2">{{product.carbohydrates}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12">
+      <div class="sidebar-nav-fixed">
+        <ul class="list-unstyled">
+          <li *ngFor="let group of products">
+            <a href="#Dairy Foods"
+              [ngClass]="selectedCategory==group.categoryName?'active':''">{{group.categoryName}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

@@ -10,10 +10,17 @@ import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
 import { ACCESS_TOKEN } from './helpers/config';
 import { AuthGuard } from './guards/auth.guard';
 import { HeaderComponent } from './components/theme/layout/header/header.component';
+import { SideBarComponent } from './components/theme/layout/side-bar/side-bar.component';
+import { WelcomeComponent } from './components/theme/layout/welcome/welcome.component';
+import { GroupedProductsComponent } from './components/content/grouped-products/grouped-products.component';
 
 const routes: Routes = [
   {
     path: '',
+    component: WelcomeComponent,
+  },
+  {
+    path: 'main',
     component: MainComponent,
     //canActivate: [AuthGuard]
   },
@@ -27,7 +34,10 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     MainComponent,
-    HeaderComponent
+    HeaderComponent,
+    SideBarComponent,
+    WelcomeComponent,
+    GroupedProductsComponent
   ],
   imports: [
     BrowserModule,

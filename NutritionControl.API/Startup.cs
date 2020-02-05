@@ -46,7 +46,7 @@ namespace NutritionControl.API
 
             services.AddScoped<DbContext, ApplicationContext>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<ITestProductsService, TestProductService>();
+            services.AddScoped<IProductsService, ProductsService>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IAuthService, AuthService>();
 

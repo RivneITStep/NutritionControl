@@ -6,14 +6,20 @@ using NutritionControl.DTO.Models;
 
 namespace NutritionControl.API.Controllers
 {
-    [Route("api/test")]
+    [Route("api/products")]
     [ApiController]
-    public class TestProductsController : ControllerBase
+    public class ProductsController : ControllerBase
     {
-        private readonly ITestProductsService _testProductsService;
-        public TestProductsController(ITestProductsService testProductsService)
+        private readonly IProductsService _testProductsService;
+        public ProductsController(IProductsService testProductsService)
         {
             _testProductsService = testProductsService;
+        }
+
+        [HttpGet("GetGrouped")]
+        public async Task<CollectionResultDto<GroupedProductDto>> GetGroupedProducts()
+        {
+            return await _testProductsService.GetGroupedProducts();
         }
 
         [HttpGet]

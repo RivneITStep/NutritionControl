@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace NutritionControl.Domain.Services.Implementation
 {
-    public class TestProductService : ITestProductsService
+    public class ProductsService : IProductsService
     {
         private readonly IGenericRepository<Product> _repository;
 
-        public TestProductService(IGenericRepository<Product> repository)
+        public ProductsService(IGenericRepository<Product> repository)
         {
             _repository = repository;
         }
@@ -43,6 +43,34 @@ namespace NutritionControl.Domain.Services.Implementation
                 Data = result,
                 IsSuccessful = true,
                 Message = "OK"
+            };
+        }
+
+        public async Task<CollectionResultDto<GroupedProductDto>> GetGroupedProducts()
+        {
+            var products = await _repository.GetAllInclude(x => x.Category);
+
+            var grouped = products.GroupBy(x => x.Category.Name).Select(x => new GroupedProductDto
+            {
+                CategoryName = x.Key,
+                Products = x.Select(prod => new ProductDto
+                {
+                    Id = prod.Id,
+                    CaloriesValue = prod.CaloriesValue,
+                    CategoryName = prod.Category.Name,
+                    Name = prod.Name,
+                    Carbohydrates = prod.Carbohydrates,
+                    Fats = prod.Fats,
+                    PhotoUrl = prod.PhotoUrl,
+                    Protein = prod.Protein
+                }).ToList()
+            }).ToList();
+
+            return new CollectionResultDto<GroupedProductDto>
+            {
+                Count = grouped.Count(),
+                Data = grouped,
+                IsSuccessful = true
             };
         }
     }

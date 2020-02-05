@@ -26,7 +26,47 @@ namespace NutritionControl.DataAccess.Configuration.TypeInitializers
                 },
                 new Product
                 {
+                    Name = "Maslo",
+                    CaloriesValue = 322,
+                    Carbohydrates = 92,
+                    Protein = 33,
+                    Fats = 543,
+                    PhotoUrl = "PHOTO_URL",
+                    Category = await context.Set<Category>().FirstOrDefaultAsync(x=>x.Name == "Dairy Foods")
+                },
+                new Product
+                {
+                    Name = "Sirok",
+                    CaloriesValue = 322,
+                    Carbohydrates = 92,
+                    Protein = 33,
+                    Fats = 543,
+                    PhotoUrl = "PHOTO_URL",
+                    Category = await context.Set<Category>().FirstOrDefaultAsync(x=>x.Name == "Dairy Foods")
+                },
+                new Product
+                {
+                    Name = "Kefir",
+                    CaloriesValue = 322,
+                    Carbohydrates = 92,
+                    Protein = 33,
+                    Fats = 543,
+                    PhotoUrl = "PHOTO_URL",
+                    Category = await context.Set<Category>().FirstOrDefaultAsync(x=>x.Name == "Dairy Foods")
+                },
+                new Product
+                {
                     Name = "Kartoshka",
+                    CaloriesValue = 322,
+                    Carbohydrates = 92,
+                    Protein = 33,
+                    Fats = 543,
+                    PhotoUrl = "PHOTO_URL",
+                    Category = await context.Set<Category>().FirstOrDefaultAsync(x=>x.Name == "Vegetables")
+                },
+                new Product
+                {
+                    Name = "Ogurets",
                     CaloriesValue = 322,
                     Carbohydrates = 92,
                     Protein = 33,
