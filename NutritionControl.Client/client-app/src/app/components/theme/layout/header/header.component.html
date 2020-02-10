@@ -23,6 +23,15 @@
               Logout
             </a>
           </li>
+          <li class="nav-item dropdown nav-user">
+            <div ngbDropdown placement="bottom-right">
+              <a class="nav-link nav-user-img" id="dropdownBasic1" ngbDropdownToggle><img src="assets/user.jpg" alt=""
+                  class="user-avatar-md rounded-circle"></a>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="nav-user-info dropdown-menu-right ">
+                <app-user-navbar></app-user-navbar>
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
     </nav>

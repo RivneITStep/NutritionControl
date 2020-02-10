@@ -12,6 +12,9 @@ namespace NutritionControl.DataAccess.Entities
         public int? Age { get; set; }
         public decimal? BMI { get; set; }
         public decimal? GoalWeight { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string Gender { get; set; }
 
         /* Navigation Properties */
 

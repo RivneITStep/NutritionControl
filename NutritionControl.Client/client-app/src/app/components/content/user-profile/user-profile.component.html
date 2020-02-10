@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="tab-regular">
+    <ngb-tabset  [destroyOnHide]="false">
+      <ngb-tab title="Personal">
+        <ng-template ngbTabContent>
+         <app-personal-profile [profile]="profile"></app-personal-profile>
+        </ng-template>
+      </ngb-tab>
+      <ngb-tab title="Physical">
+        <ng-template ngbTabContent>
+          <app-physical-profile [profile]="profile"></app-physical-profile>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+    <div class="row">
+      <div class="col-6">
+        <button class="btn btn-success btn-block" (click)="onSave()">Save</button>
+      </div>
+      <div class="col-6">
+        <button class="btn btn-danger btn-block">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
+</div>

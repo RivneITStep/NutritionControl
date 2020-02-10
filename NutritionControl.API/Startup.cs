@@ -49,6 +49,7 @@ namespace NutritionControl.API
             services.AddScoped<IProductsService, ProductsService>();
             services.AddScoped<IJwtService, JwtService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IAccountService, AccountService>();
 
             services.AddIdentity<User, IdentityRole<int>>(opts =>
             {

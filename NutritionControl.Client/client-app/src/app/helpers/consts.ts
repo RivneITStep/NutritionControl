@@ -3,7 +3,8 @@ export const API_PATH = "https://localhost:44322/api/";
 export const API_ROUTES = {
     register: API_PATH + "auth/register/",
     login: API_PATH + "auth/login/",
-    products: API_PATH + "products/"
+    products: API_PATH + "products/",
+    account: API_PATH + "account/"
 }
 
 export const ACCESS_TOKEN: string = "access_token";

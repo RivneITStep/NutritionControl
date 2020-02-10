@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from 'src/app/helpers/config';
+import { ACCESS_TOKEN, REFRESH_TOKEN } from 'src/app/helpers/consts';
 
 @Injectable({
   providedIn: 'root'
