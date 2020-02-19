@@ -8,6 +8,7 @@ import { TokenService } from './token.service';
 import { map } from 'rxjs/operators';
 import { ApiResponse, ApiSingleResponse } from 'src/app/models/apiResponse';
 import { UserCredentials } from 'src/app/helpers/userCreds';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,8 @@ export class AuthService {
   redirectUrl: string;
 
   constructor(private http: HttpClient,
-    private tokenService: TokenService) { }
+    private tokenService: TokenService,
+    private router: Router) { }
 
   register(model: RegisterDto): Observable<ApiResponse> {
     console.log(API_ROUTES.register);
@@ -51,5 +53,6 @@ export class AuthService {
 
   logout(): void {
     this.tokenService.removeToken();
-  }
+    this.router.navigateByUrl("");
+  } 
 }

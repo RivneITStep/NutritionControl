@@ -7,27 +7,27 @@ export class SidebarService {
 
   links = [
     {
-      link: "",
+      routerLink: "news",
       text: "News"
     },
     {
-      link: "",
+      routerLink: "products",
       text: "Products"
     },
     {
-      link: "",
+      routerLink: "calculators",
       text: "Calculators"
     },
     {
-      link: "",
+      routerLink: "",
       text: "Fav. Prod"
     },
     {
-      link: "",
+      routerLink: "",
       text: "Fav. Recipes"
     },
     {
-      link: "",
+      routerLink: "",
       text: "Recipes"
     },
     {

@@ -23,9 +23,7 @@ namespace NutritionControl.Domain.Services.Implementation
         public async Task<CollectionResultDto<ProductDto>> GetAllProducts()
         {
             //select * from products inner join category ...
-            var data = await _repository.GetAllInclude(x => x.Category);
-
-            var result = data.Select(x => new ProductDto
+            var result = await _repository.GetAllSelect(selector: x => new ProductDto
             {
                 Id = x.Id,
                 Name = x.Name,
@@ -35,12 +33,12 @@ namespace NutritionControl.Domain.Services.Implementation
                 CaloriesValue = x.CaloriesValue,
                 CategoryName = x.Category.Name,
                 Carbohydrates = x.Carbohydrates
-            }).ToList();
+            }, includes: x => x.Category);
 
             return new CollectionResultDto<ProductDto>
             {
                 Count = result.Count(),
-                Data = result,
+                Data = result.ToList(),
                 IsSuccessful = true,
                 Message = "OK"
             };

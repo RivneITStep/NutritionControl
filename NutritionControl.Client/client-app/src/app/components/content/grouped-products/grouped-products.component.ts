@@ -24,4 +24,13 @@ export class GroupedProductsComponent implements OnInit {
         }
       });
   }
+
+  scrollToCategory(categoryName: string) {
+    //mda
+    let el = document.getElementById(categoryName);
+    var rect = el.getBoundingClientRect();
+    window.scrollTo({top: rect.top + document.documentElement.scrollTop - 90,behavior:"smooth"})
+
+    this.selectedCategory = categoryName;
+  }
 }

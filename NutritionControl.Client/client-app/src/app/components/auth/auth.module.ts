@@ -2,17 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-const routes = [
+const routes: Routes = [
 	{
 		path: 'login',
-		component: LoginComponent
+    component: LoginComponent,
+    pathMatch: 'full'
 	},
 	{
 		path: 'register',
-		component: RegisterComponent
+    component: RegisterComponent,
+    pathMatch: 'full'
 	}
 ]
 

@@ -72,6 +72,11 @@ namespace NutritionControl.DataAccess.Repository
             return await _set.ToListAsync();
         }
 
+        public IQueryable<TEntity> GetAsQueryable()
+        {
+            return _set.AsQueryable();
+        }
+
         public async Task<IEnumerable<TEntity>> GetAll(Expression<Func<TEntity, bool>> predicate)
         {
             return await _set.Where(predicate).ToListAsync();
@@ -99,9 +104,39 @@ namespace NutritionControl.DataAccess.Repository
                     current.Include(includeProperty)).Skip(startIndex * count).Take(count).ToListAsync();
         }
 
-        public async Task<TEntity> GetSingle(Expression<Func<TEntity, bool>> predicate)
+        public async Task<TEntity> GetSingle(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includes)
         {
-            return await _set.FirstOrDefaultAsync(predicate);
+            var query = _set.AsQueryable();
+
+            if (includes != null)
+            {
+                query = includes.Aggregate(query,
+                (current, includeProperty) =>
+                    current.Include(includeProperty));
+            }
+
+            return await query.FirstOrDefaultAsync(predicate);
+        }
+
+        public async Task<IEnumerable<TResult>> GetAllSelect<TResult>(Expression<Func<TEntity, TResult>> selector,
+                                                                      Expression<Func<TEntity, bool>> predicate = null,
+                                                                      params Expression<Func<TEntity, object>>[] includes)
+        {
+            var query = _set.AsQueryable();
+
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+
+            if (includes != null)
+            {
+                query = includes.Aggregate(query,
+                (current, includeProperty) =>
+                    current.Include(includeProperty));
+            }
+
+            return await query.Select(selector).ToListAsync();
         }
 
         public async Task Update(TEntity entity)
@@ -110,5 +145,4 @@ namespace NutritionControl.DataAccess.Repository
             await _db.SaveChangesAsync();
         }
     }
-
 }

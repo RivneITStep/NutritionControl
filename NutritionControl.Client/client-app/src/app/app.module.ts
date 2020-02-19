@@ -19,6 +19,8 @@ import { UserProfileComponent } from './components/content/user-profile/user-pro
 import { PersonalProfileComponent } from './components/content/user-profile/personal-profile/personal-profile.component';
 import { PhysicalProfileComponent } from './components/content/user-profile/physical-profile/physical-profile.component';
 import { FormsModule } from '@angular/forms';
+import { MainModule } from './components/theme/main/main.module';
+import { SharedModule } from './components/shared/shared.module';
 
 const routes: Routes = [
   {
@@ -27,34 +29,28 @@ const routes: Routes = [
   },
   {
     path: 'main',
-    component: MainComponent,
-    //canActivate: [AuthGuard]
+    loadChildren: () => import('./components/theme/main/main.module').then(m=>m.MainModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'auth',
     loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)
-  }
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  },
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainComponent,
-    HeaderComponent,
-    SideBarComponent,
-    WelcomeComponent,
-    GroupedProductsComponent,
-    UserNavbarComponent,
-    UserProfileComponent,
-    PersonalProfileComponent,
-    PhysicalProfileComponent
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AuthModule,
-    FormsModule,
-    NgbModule,
+    SharedModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: () => { return localStorage.getItem(ACCESS_TOKEN) },
