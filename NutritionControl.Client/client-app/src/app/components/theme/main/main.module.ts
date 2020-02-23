@@ -8,6 +8,7 @@ import { PersonalProfileComponent } from '../../content/user-profile/personal-pr
 import { PhysicalProfileComponent } from '../../content/user-profile/physical-profile/physical-profile.component';
 import { MainComponent } from './main.component';
 import { SharedModule } from '../../shared/shared.module';
+import { SidebarNavComponent } from '../../content/sidebar-nav/sidebar-nav.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,8 @@ const routes: Routes = [
     UserProfileComponent,
     SideBarComponent,
     PersonalProfileComponent,
-    PhysicalProfileComponent
+    PhysicalProfileComponent,
+    SidebarNavComponent
   ],
   imports: [
     SharedModule,

@@ -21,6 +21,7 @@ import { PhysicalProfileComponent } from './components/content/user-profile/phys
 import { FormsModule } from '@angular/forms';
 import { MainModule } from './components/theme/main/main.module';
 import { SharedModule } from './components/shared/shared.module';
+import { SidebarNavComponent } from './components/content/sidebar-nav/sidebar-nav.component';
 
 const routes: Routes = [
   {

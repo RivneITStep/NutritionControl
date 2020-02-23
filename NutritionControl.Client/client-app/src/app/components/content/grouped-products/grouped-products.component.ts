@@ -9,7 +9,8 @@ import { GroupedProducts } from 'src/app/models/productDto';
 })
 export class GroupedProductsComponent implements OnInit {
 
-  products: GroupedProducts;
+  groups: Array<GroupedProducts>;
+  categories: Array<string>;
 
   selectedCategory: string = "";
 
@@ -18,19 +19,11 @@ export class GroupedProductsComponent implements OnInit {
   ngOnInit() {
     this.productsService.getGrouped()
       .subscribe((res: any) => {
-        this.products = res.data;
+        this.groups = res.data;
+        this.categories = this.groups.map(x=>x.categoryName);
         if (res.count > 0) {
-          this.selectedCategory = this.products[0].categoryName;
+          this.selectedCategory = this.groups[0].categoryName;
         }
       });
-  }
-
-  scrollToCategory(categoryName: string) {
-    //mda
-    let el = document.getElementById(categoryName);
-    var rect = el.getBoundingClientRect();
-    window.scrollTo({top: rect.top + document.documentElement.scrollTop - 90,behavior:"smooth"})
-
-    this.selectedCategory = categoryName;
   }
 }

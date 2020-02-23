@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NutritionControl.Domain.Services.Interfaces;
 using NutritionControl.DTO.DtoResults;
-using Microsoft.AspNet.Identity;
+
 
 namespace NutritionControl.API.Controllers
 {

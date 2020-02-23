@@ -1,0 +1,8 @@
+<div class="sidebar-nav-fixed">
+  <ul class="list-unstyled">
+    <li class="pointer" *ngFor="let category of categories">
+      <a (click)="scrollToCategory(category)"
+        [ngClass]="selectedCategory==category?'active':''">{{category}}</a>
+    </li>
+  </ul>
+</div>
