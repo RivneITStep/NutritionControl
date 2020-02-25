@@ -31,11 +31,11 @@ export class SidebarService {
       text: "Recipes"
     },
     {
-      link: "",
+      routerLink: "diary",
       text: "Diary"
     },
     {
-      link: "",
+      routerLink: "",
       text: "Diet"
     }
   ]

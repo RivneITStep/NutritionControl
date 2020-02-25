@@ -9,3 +9,7 @@ html, body {
 .pointer {
   cursor: pointer;
 }
+
+.input-group input {
+  height: auto;
+}

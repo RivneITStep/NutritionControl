@@ -4,7 +4,8 @@ export const API_ROUTES = {
     register: API_PATH + "auth/register/",
     login: API_PATH + "auth/login/",
     products: API_PATH + "products/",
-    account: API_PATH + "account/"
+    account: API_PATH + "account/",
+    diary: API_PATH + "diary/"
 }
 
 export const ACCESS_TOKEN: string = "access_token";

@@ -12,9 +12,12 @@ namespace NutritionControl.API.Controllers
 	public class DiaryController : ControllerBase
 	{
 		private readonly IDiaryService _diaryService;
-		public DiaryController(IDiaryService diaryService)
+		private readonly IAuthService _authService;
+		public DiaryController(IDiaryService diaryService,
+							   IAuthService authService)
 		{
 			_diaryService = diaryService;
+			_authService = authService;
 		}
 
 		#region WeightInfo
@@ -37,10 +40,11 @@ namespace NutritionControl.API.Controllers
 		}
 
 		[HttpPost("AddWeightInfo")]
-		public async Task<ResultDto> AddWeightInfo(WeightInfoDto weightInfo, int userId)
+		public async Task<ResultDto> AddWeightInfo(WeightInfoDto weightInfo)
 		{
 			try
 			{
+				var userId = _authService.GetAuthorizedUserId();
 				return await _diaryService.AddWeightInfo(weightInfo, userId);
 			}
 			catch (Exception ex)
@@ -75,10 +79,11 @@ namespace NutritionControl.API.Controllers
 		}
 
 		[HttpPost("AddWaterValue")]
-		public async Task<ResultDto> AddWaterValue(WaterValueDto waterValue, int userId)
+		public async Task<ResultDto> AddWaterValue(WaterValueDto waterValue)
 		{
 			try
 			{
+				var userId = _authService.GetAuthorizedUserId();
 				return await _diaryService.AddWaterValue(waterValue, userId);
 			}
 			catch (Exception ex)

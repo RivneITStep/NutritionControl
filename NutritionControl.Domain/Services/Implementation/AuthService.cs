@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using NutritionControl.DataAccess.Entities;
 using NutritionControl.Domain.Services.Interfaces;
+using NutritionControl.Domain.Utils;
 using NutritionControl.DTO.DtoResults;
 using NutritionControl.DTO.Models.Auth;
 using System.Collections.Generic;
@@ -14,15 +16,23 @@ namespace NutritionControl.Domain.Services.Implementation
         private readonly SignInManager<User> _signInManager;
         private readonly UserManager<User> _userManager;
         private readonly IJwtService _jwtService;
+		private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AuthService(UserManager<User> userManager,
+		public AuthService(UserManager<User> userManager,
                            IJwtService jwtService,
-                           SignInManager<User> signInManager)
+                           SignInManager<User> signInManager,
+						   IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _jwtService = jwtService;
             _signInManager = signInManager;
-        }
+			_httpContextAccessor = httpContextAccessor;
+		}
+
+		public int GetAuthorizedUserId()
+		{
+			return _httpContextAccessor.HttpContext.User.GetLoggedInUserId<int>();
+		}
 
         public async Task<ResultDto> Login(LoginDto model)
         {

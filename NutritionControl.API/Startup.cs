@@ -44,7 +44,9 @@ namespace NutritionControl.API
                    b => b.MigrationsAssembly("NutritionControl.API")).UseLoggerFactory(MyLoggerFactory).EnableSensitiveDataLogging()
                );
 
-            services.AddScoped<DbContext, ApplicationContext>();
+			services.AddHttpContextAccessor();
+
+			services.AddScoped<DbContext, ApplicationContext>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IProductsService, ProductsService>();
             services.AddScoped<IJwtService, JwtService>();

@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { GroupedProductsComponent } from '../../content/grouped-products/grouped-products.component';
 import { Routes, RouterModule } from '@angular/router';
 import { UserProfileComponent } from '../../content/user-profile/user-profile.component';
@@ -9,6 +8,9 @@ import { PhysicalProfileComponent } from '../../content/user-profile/physical-pr
 import { MainComponent } from './main.component';
 import { SharedModule } from '../../shared/shared.module';
 import { SidebarNavComponent } from '../../content/sidebar-nav/sidebar-nav.component';
+import { DiaryComponent } from '../../content/diary/diary.component';
+import { WeightInfosComponent } from '../../content/diary/weight-infos/weight-infos.component';
+import { WaterValuesComponent } from '../../content/diary/water-values/water-values.component';
 
 const routes: Routes = [
   {
@@ -27,6 +29,10 @@ const routes: Routes = [
       {
         path: 'profile',
         component: UserProfileComponent
+      },
+      {
+        path: 'diary',
+        component: DiaryComponent
       }
     ]
   }
@@ -40,7 +46,10 @@ const routes: Routes = [
     SideBarComponent,
     PersonalProfileComponent,
     PhysicalProfileComponent,
-    SidebarNavComponent
+    SidebarNavComponent,
+    DiaryComponent,
+    WeightInfosComponent,
+    WaterValuesComponent
   ],
   imports: [
     SharedModule,

@@ -55,7 +55,7 @@ namespace NutritionControl.Domain.Services.Implementation
 				WeightValue = x.WeightValue
 			}, x => x.UserId == userId);
 
-			var result = weightInfos.ToList();
+			var result = weightInfos.OrderBy(x => x.DateOfMeasurement).ToList();
 
 			return new CollectionResultDto<WeightInfoDto>
 			{
@@ -101,7 +101,12 @@ namespace NutritionControl.Domain.Services.Implementation
 				Value = x.Value
 			}, x => x.UserId == userId);
 
-			var result = waterValues.ToList();
+			var result = waterValues.GroupBy(x => x.DateOfMeasurement.ToShortDateString()).Select(x => new WaterValueDto
+			{
+				Value = x.Sum(w => w.Value),
+				DateOfMeasurement = DateTime.Parse(x.Key),
+				Id = 0
+			}).OrderBy(x => x.DateOfMeasurement).ToList();
 
 			return new CollectionResultDto<WaterValueDto>
 			{

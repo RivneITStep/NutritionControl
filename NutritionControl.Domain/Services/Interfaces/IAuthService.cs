@@ -8,5 +8,7 @@ namespace NutritionControl.Domain.Services.Interfaces
     {
         Task<ResultDto> Register(RegisterDto entity);
         Task<ResultDto> Login(LoginDto entity);
-    }
+		int GetAuthorizedUserId();
+
+	}
 }
