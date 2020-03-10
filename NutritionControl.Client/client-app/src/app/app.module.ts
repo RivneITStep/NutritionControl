@@ -2,12 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { RouterModule, Routes } from '@angular/router'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtModule, JwtHelperService } from '@auth0/angular-jwt';
-import { ACCESS_TOKEN } from './helpers/consts';
+import { ACCESS_TOKEN, APP_ROUTES } from './helpers/consts';
 import { AuthGuard } from './guards/auth.guard';
 import { WelcomeComponent } from './components/theme/layout/welcome/welcome.component';
 import { SharedModule } from './components/shared/shared.module';
+import { ErrorHandlingInterceptor } from './helpers/interceptors/errorHandling.interceptor';
 
 const routes: Routes = [
   {
@@ -15,18 +16,22 @@ const routes: Routes = [
     component: WelcomeComponent,
   },
   {
-    path: 'main',
+    path: APP_ROUTES.main,
     loadChildren: () => import('./components/theme/main/main.module').then(m=>m.MainModule),
     canActivate: [AuthGuard]
   },
   {
-    path: 'auth',
+    path: APP_ROUTES.auth,
     loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)
+  },
+  {
+    path: APP_ROUTES.admin,
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
   },
   {
     path: '**',
     redirectTo: ''
-  },
+  }
 ]
 
 @NgModule({
@@ -47,7 +52,14 @@ const routes: Routes = [
     }),
     RouterModule.forRoot(routes)
   ],
-  providers: [JwtHelperService],
+  providers: [
+    JwtHelperService,
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: ErrorHandlingInterceptor, 
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

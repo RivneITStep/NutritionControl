@@ -9,12 +9,17 @@
       <div class="collapse navbar-collapse " id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto navbar-right-top">
           <li *ngIf="!isLoggedIn()" class="nav-item">
-            <a class="nav-link" [routerLink]="['/auth/login']" routerLinkActive="router-link-active">
+            <a class="nav-link pointer" [routerLink]="['admin-panel']" routerLinkActive="router-link-active">
+              Adminka
+            </a>
+          </li>
+          <li *ngIf="!isLoggedIn()" class="nav-item">
+            <a class="nav-link pointer" [routerLink]="['/auth/login']" routerLinkActive="router-link-active">
               Login
             </a>
           </li>
           <li *ngIf="!isLoggedIn()" class="nav-item">
-            <a class="nav-link" [routerLink]="['/auth/register']" routerLinkActive="router-link-active">
+            <a class="nav-link pointer" [routerLink]="['/auth/register']" routerLinkActive="router-link-active">
               Register
             </a>
           </li>

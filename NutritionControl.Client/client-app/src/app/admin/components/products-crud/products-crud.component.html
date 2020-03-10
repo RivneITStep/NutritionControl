@@ -1,0 +1,87 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="container">
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-xl-9 col-lg-8 col-6">
+                <h3>Products</h3>
+              </div>
+              <div class="col-xl-3 col-lg-4 col-6">
+                <div class="input-group">
+                  <span class="input-group-prepend">
+                    <span class="input-group-text">Page Size:</span>
+                  </span>
+                  <select (change)="onPageSizeChange()" [(ngModel)]="pageSize" class="form-control">
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                    <option>100</option>
+                  </select>
+                </div>
+                
+              </div>
+
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="table table-striped table-responsive-md">
+              <thead>
+                <tr class="d-flex">
+                  <th class="col-3" scope="col">Name</th>
+                  <th class="col-2" scope="col">Category</th>
+                  <th class="col-2" scope="col">Calories</th>
+                  <th class="col-1" scope="col">Protein</th>
+                  <th class="col-1" scope="col">Fats</th>
+                  <th class="col-1" scope="col">Carbohydrates</th>
+                  <th class="col-1" scope="col">Delete</th>
+                  <th class="col-1" scope="col">Edit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="d-flex" *ngFor="let product of products">
+                  <td class="col-3">
+                    <input [disabled]="!checkEdit(product.id)" class="form-control" type="text"
+                      [(ngModel)]="product.name">
+                  </td>
+                  <td class="col-2">
+                    <input [disabled]="!checkEdit(product.id)" class="form-control" type="text"
+                      [(ngModel)]="product.categoryName">
+                  </td>
+                  <td class="col-2">
+                    <input [disabled]="!checkEdit(product.id)" class="form-control" type="number"
+                      [(ngModel)]="product.caloriesValue">
+                  </td>
+                  <td class="col-1">
+                    <input [disabled]="!checkEdit(product.id)" class="form-control" type="number"
+                      [(ngModel)]="product.protein">
+                  </td>
+                  <td class="col-1">
+                    <input [disabled]="!checkEdit(product.id)" class="form-control" type="number"
+                      [(ngModel)]="product.fats">
+                  </td>
+                  <td class="col-1">
+                    <input [disabled]="!checkEdit(product.id)" class="form-control" type="number"
+                      [(ngModel)]="product.carbohydrates">
+                  </td>
+                  <td class="col-1">
+                    <button class="btn btn-sm w-100" (click)="onDelete(product.id)"><i class="fas fa-trash-alt"></i></button>
+                  </td>
+                  <td class="col-1">
+                    <button class="btn btn-sm w-100" (click)="onEdit(product)"><i class="fas fa-edit"></i></button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer">
+            <ngb-pagination class="d-flex justify-content-center" (pageChange)="onPageChange($event)" [rotate]="true"
+              [ellipses]="false" [pageSize]="pageSize" [maxSize]="5" [collectionSize]="count" [(page)]="page" [boundaryLinks]="false"
+              aria-label="Default pagination"></ngb-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

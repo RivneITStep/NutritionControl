@@ -1,4 +1,7 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/alertifyjs/build/css/alertify.min.css';
+@import '../node_modules/alertifyjs/build/css/themes/bootstrap.min.css';
+@import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css';
 @import 'assets/fonts/circular-std/style.css';
 @import 'assets/css/style.css';
 
@@ -11,5 +14,9 @@ html, body {
 }
 
 .input-group input {
+  height: auto;
+}
+
+.input-group select {
   height: auto;
 }

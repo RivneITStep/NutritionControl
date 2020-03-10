@@ -5,13 +5,15 @@ import { UserNavbarComponent } from '../theme/layout/header/user-navbar/user-nav
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SideBarComponent } from '../theme/layout/side-bar/side-bar.component';
 
 
 
 @NgModule({
   declarations: [
     HeaderComponent,
-    UserNavbarComponent
+    UserNavbarComponent,
+    SideBarComponent
   ],
   imports: [
     NgbModule,
@@ -21,6 +23,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   exports: [
     CommonModule,
     FormsModule,
+    SideBarComponent,
     HeaderComponent,
     UserNavbarComponent,
     NgbModule

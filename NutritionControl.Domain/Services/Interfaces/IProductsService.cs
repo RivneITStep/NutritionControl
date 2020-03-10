@@ -8,5 +8,8 @@ namespace NutritionControl.Domain.Services.Interfaces
     {
         Task<CollectionResultDto<ProductDto>> GetAllProducts();
         Task<CollectionResultDto<GroupedProductDto>> GetGroupedProducts();
+        Task<ResultDto> Delete(int id);
+        Task<ResultDto> Edit(ProductDto model);
+        Task<PaginationResultDto<ProductDto>> GetProductsPaginated(int? page, int pageSize);
     }
 }

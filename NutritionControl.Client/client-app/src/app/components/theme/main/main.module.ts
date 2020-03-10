@@ -43,7 +43,6 @@ const routes: Routes = [
     MainComponent,
     GroupedProductsComponent,
     UserProfileComponent,
-    SideBarComponent,
     PersonalProfileComponent,
     PhysicalProfileComponent,
     SidebarNavComponent,

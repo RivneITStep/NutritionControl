@@ -14,10 +14,87 @@ namespace NutritionControl.Domain.Services.Implementation
     public class ProductsService : IProductsService
     {
         private readonly IGenericRepository<Product> _repository;
+        private readonly IGenericRepository<Category> _cateroryRepository;
 
-        public ProductsService(IGenericRepository<Product> repository)
+        public ProductsService(IGenericRepository<Product> repository,
+	                           IGenericRepository<Category> cateroryRepository)
         {
             _repository = repository;
+            _cateroryRepository = cateroryRepository;
+
+        }
+
+        public async Task<ResultDto> Edit(ProductDto model)
+        {
+	        var product = await _repository.Find((model.Id));
+
+	        if (product == null)
+		        return new ResultDto
+		        {
+			        IsSuccessful = false,
+			        Message = "Error"
+		        };
+
+	        product.CaloriesValue = model.CaloriesValue;
+	        product.Carbohydrates = model.Carbohydrates;
+	        product.Protein = model.Protein;
+	        product.Fats = model.Fats;
+	        product.Name = model.Name;
+	        product.Category = await _cateroryRepository.GetSingle(x => x.Name == model.CategoryName) ??
+	                           new Category { Name = model.CategoryName };
+
+	        await _repository.Update(product);
+
+	        return new ResultDto
+	        {
+		        IsSuccessful = true,
+		        Message = "Edited"
+	        };
+        }
+
+        public async Task<ResultDto> Delete(int id)
+        {
+	        var product = await _repository.Find(id);
+
+	        if (product == null)
+		        return new ResultDto
+		        {
+			        IsSuccessful = false,
+			        Message = "Error"
+		        };
+
+	        await _repository.Delete(product);
+	        return new ResultDto
+	        {
+		        IsSuccessful = true,
+		        Message = "Product was successfully deleted"
+	        };
+        }
+
+        public async Task<PaginationResultDto<ProductDto>> GetProductsPaginated(int? page, int pageSize)
+        {
+	        var count = await _repository.CountAll();
+			
+	        var result = await _repository.GetPaged(page??1, pageSize, (x => x.Category));
+
+	        return new PaginationResultDto<ProductDto>
+	        {
+		        IsSuccessful = true,
+		        Count = count,
+		        Data = result.Select(x => new ProductDto
+		        {
+			        Id = x.Id,
+			        Name = x.Name,
+			        PhotoUrl = x.PhotoUrl,
+			        Protein = x.Protein,
+			        Fats = x.Fats,
+			        CaloriesValue = x.CaloriesValue,
+			        CategoryName = x.Category.Name,
+			        Carbohydrates = x.Carbohydrates
+		        }).ToList(),
+		        PageIndex = page ?? 1,
+		        PageSize = pageSize
+	        };
         }
 
         public async Task<CollectionResultDto<ProductDto>> GetAllProducts()

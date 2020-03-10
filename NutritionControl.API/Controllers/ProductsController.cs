@@ -10,22 +10,42 @@ namespace NutritionControl.API.Controllers
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductsService _testProductsService;
-        public ProductsController(IProductsService testProductsService)
+        private readonly IProductsService _productsService;
+        public ProductsController(IProductsService productsService)
         {
-            _testProductsService = testProductsService;
+	        _productsService = productsService;
         }
 
         [HttpGet("GetGrouped")]
         public async Task<CollectionResultDto<GroupedProductDto>> GetGroupedProducts()
         {
-            return await _testProductsService.GetGroupedProducts();
+            return await _productsService.GetGroupedProducts();
         }
 
         [HttpGet]
         public async Task<CollectionResultDto<ProductDto>> GetProducts()
         {
-            return await _testProductsService.GetAllProducts();
+            return await _productsService.GetAllProducts();
         }
-    }
+
+        [HttpGet("Paged/{page}/{pageSize}")]
+        public async Task<PaginationResultDto<ProductDto>> GetProductsPaged(int page,int pageSize)
+        {
+	        return await _productsService.GetProductsPaginated(page, pageSize);
+        }
+
+		[HttpDelete]
+        public async Task<ResultDto> DeleteProduct(int id)
+        {
+	        return await _productsService.Delete(id);
+
+        }
+
+        [HttpPut]
+        public async Task<ResultDto> EditProduct(ProductDto model)
+        {
+	        return await _productsService.Edit(model);
+
+        }
+	}
 }

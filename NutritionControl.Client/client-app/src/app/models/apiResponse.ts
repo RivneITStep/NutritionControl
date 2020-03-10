@@ -11,3 +11,8 @@ export class ApiCollectionResponse extends ApiResponse {
   data: Array<any>;
   count: number;
 }
+
+export class ApiPaginationResponse extends ApiCollectionResponse {
+  pageIndex: number;
+  pageSize: number;
+}

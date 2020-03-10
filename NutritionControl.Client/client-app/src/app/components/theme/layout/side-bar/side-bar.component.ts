@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SidebarService } from 'src/app/services/layout/sidebar.service';
 
 @Component({
@@ -8,12 +8,9 @@ import { SidebarService } from 'src/app/services/layout/sidebar.service';
 })
 export class SideBarComponent implements OnInit {
 
-  links: Array<any>;
+  @Input() links: Array<any>;
 
   constructor(private sidebarService: SidebarService) { }
 
-  ngOnInit() {
-    this.links = this.sidebarService.getSidebarLinks();
-  }
-
+  ngOnInit() { }
 }
