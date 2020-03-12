@@ -23,8 +23,12 @@ namespace NutritionControl.DataAccess.Interfaces
                                                          Expression<Func<TEntity, bool>> predicate = null,
                                                          params Expression<Func<TEntity, object>>[] includes);
         Task<TEntity> Find(int Id);
-        Task<IEnumerable<TEntity>> GetPaged(int startIndex, int count, params Expression<Func<TEntity, object>>[] includes);
-        Task<int> CountAll();
+
+        Task<IEnumerable<TEntity>> GetPaged(int startIndex, int count,
+	        Expression<Func<TEntity, object>> orderBySelector = null,
+	        params Expression<Func<TEntity, object>>[] includes);
+
+		Task<int> CountAll();
         Task<int> CountWhere(Expression<Func<TEntity, bool>> predicate);
         IQueryable<TEntity> GetAsQueryable();
     }

@@ -11,7 +11,12 @@
                       Menu
                   </li>
                   <li *ngFor="let link of links" class="nav-item">
-                      <a class="nav-link" [routerLink]="[link.routerLink]" routerLinkActive="router-link-active" > {{link.text}} </a>
+                      <a class="nav-link" [routerLink]="[link.routerLink]" routerLinkActive="router-link-active" >
+                        <span>
+                          <i [class]="link.icon"></i>
+                          {{link.text}} 
+                        </span>
+                      </a>
                   </li>
               </ul>
           </div>

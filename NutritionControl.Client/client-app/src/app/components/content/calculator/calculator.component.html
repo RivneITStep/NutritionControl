@@ -1,0 +1,80 @@
+<div class="container-fluid w-calc">
+  <div class="card">
+    <div class="card-header">
+      <h2 class="text-center">BMI Calculator</h2>
+    </div>
+    <div class="card-body mx-2">
+
+      <div class="form-group">
+        <div class="text-center">
+          <label class="custom-control custom-radio custom-control-inline">
+            <input value="male" [(ngModel)]="gender" type="radio" name="radio-inline" checked=""
+              class="custom-control-input"><span class="custom-control-label">Male</span>
+          </label>
+          <label class="custom-control custom-radio custom-control-inline">
+            <input value="female" [(ngModel)]="gender" type="radio" name="radio-inline"
+              class="custom-control-input"><span class="custom-control-label">Female</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Height</label>
+        <div class="row align-items-center">
+          <div class="col-8">
+            <input class="form-control slider my-auto" type="range" [(ngModel)]="height" min="100" max="200">
+          </div>
+          <div class="col-4">
+            <div class="input-group">
+              <input [(ngModel)]="height" type="number" class="form-control" />
+              <div class="input-group-append">
+                <span style="width: 40px;" class="input-group-text text-center"> sm </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="form-group">
+
+        <label>Weight</label>
+        <div class="row align-items-center">
+          <div class="col-8">
+            <input class="form-control slider my-auto" type="range" [(ngModel)]="weight" min="40" max="150">
+          </div>
+          <div class="col-4">
+            <div class="input-group">
+              <input [(ngModel)]="weight" type="number" class="form-control" />
+              <div class="input-group-append">
+                <span style="width: 40px;" class="input-group-text"> kg </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      <div class="form-group">
+        <button class="btn btn-default w-100" (click)="calculate()">Calculate</button>
+      </div>
+      <div class="form-group">
+        <div class="tooltip show bs-tooltip-top index-tooltip" [ngStyle]="{left:indexratio}">
+          <div class="arrow text-center" >
+          </div>
+          <div class="tooltip-inner">
+            {{index | number: '1.1-2'}}
+          </div>
+        </div>
+        
+      </div>
+      <div class="form-group">
+        <div class="progress">
+          <div class="progress-bar bg-info" role="progressbar" style="width: 75%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="progress-bar bg-warning" role="progressbar" style="width: 100%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+          <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -34,6 +34,12 @@ namespace NutritionControl.API.Controllers
 	        return await _productsService.GetProductsPaginated(page, pageSize);
         }
 
+        [HttpPost]
+        public async Task<ResultDto> AddProduct(ProductDto model)
+        {
+	        return await _productsService.Add(model);
+        }
+
 		[HttpDelete]
         public async Task<ResultDto> DeleteProduct(int id)
         {
@@ -45,7 +51,6 @@ namespace NutritionControl.API.Controllers
         public async Task<ResultDto> EditProduct(ProductDto model)
         {
 	        return await _productsService.Edit(model);
-
         }
 	}
 }

@@ -19,6 +19,15 @@ export class ProductsCrudComponent implements OnInit {
   selectedId: number = -1;
 
   products: Array<ProductDto>;
+  newProduct: ProductDto = {
+    name: "",
+    caloriesValue: 0,
+    carbohydrates: 0,
+    categoryName: "",
+    fats: 0,
+    id: 0,
+    protein: 0 
+  };
 
   constructor(private productsCrudService: ProductsCrudService,
               private alertifyService: AlertifyService) { }
@@ -70,6 +79,15 @@ export class ProductsCrudComponent implements OnInit {
         }
       })
     });
+  }
+
+  onAdd() {
+    this.productsCrudService.addProduct(this.newProduct).subscribe((res: ApiResponse) => {
+      if(res.isSuccessful){
+        this.alertifyService.success("Product was added");
+        this.loadProducts(this.page);
+      }
+    })
   }
 
   onPageChange(event) {

@@ -8,35 +8,43 @@ export class SidebarService {
   links = [
     {
       routerLink: "news",
-      text: "News"
+      text: "News",
+      icon: "fas fa-newspaper pb-1"
     },
     {
       routerLink: "products",
-      text: "Products"
+      text: "Products",
+      icon: "fas fa-utensils pb-1"
     },
     {
-      routerLink: "calculators",
-      text: "Calculators"
-    },
-    {
-      routerLink: "",
-      text: "Fav. Prod"
-    },
-    {
-      routerLink: "",
-      text: "Fav. Recipes"
+      routerLink: "calculator",
+      text: "Calculator",
+      icon: "fas fa-calculator pb-1"
     },
     {
       routerLink: "",
-      text: "Recipes"
+      text: "Fav. Prod",
+      icon: "fas fa-star pb-1"
+    },
+    {
+      routerLink: "",
+      text: "Fav. Recipes",
+      icon: "fas fa-star pb-1"
+    },
+    {
+      routerLink: "",
+      text: "Recipes",
+      icon: "fas fa-clipboard-list pb-1"
     },
     {
       routerLink: "diary",
-      text: "Diary"
+      text: "Diary",
+      icon: "fas fa-book pb-1"
     },
     {
       routerLink: "",
-      text: "Diet"
+      text: "Diet",
+      icon: "fas fa-hamburger pb-1"
     }
   ]
 

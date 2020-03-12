@@ -96,10 +96,19 @@ namespace NutritionControl.DataAccess.Repository
                     current.Include(includeProperty)).ToListAsync();
         }
 
-        public async Task<IEnumerable<TEntity>> GetPaged(int startIndex, int count, params Expression<Func<TEntity, object>>[] includes)
+        public async Task<IEnumerable<TEntity>> GetPaged(int startIndex, int count, 
+	        Expression<Func<TEntity, object>> orderBySelector = null, 
+	        params Expression<Func<TEntity, object>>[] includes)
         {
             startIndex = startIndex - 1;
-            return await includes.Aggregate(_set.AsQueryable(),
+            var query = _set.AsQueryable();
+
+            if (orderBySelector!=null)
+            {
+	            query = query.OrderBy(orderBySelector);
+            }
+
+            return await includes.Aggregate(query,
                 (current, includeProperty) =>
                     current.Include(includeProperty)).Skip(startIndex * count).Take(count).ToListAsync();
         }

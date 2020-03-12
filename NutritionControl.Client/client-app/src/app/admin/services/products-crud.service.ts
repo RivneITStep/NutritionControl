@@ -27,4 +27,8 @@ export class ProductsCrudService {
   getProductsPaginated(page: number,pageSize: number): Observable<ApiResponse> {
     return this.http.get<ApiCollectionResponse>(API_ROUTES.products + "paged/" + page + "/" + pageSize);
   }
+
+  addProduct(product: ProductDto): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(API_ROUTES.products, product);
+  }
 }
