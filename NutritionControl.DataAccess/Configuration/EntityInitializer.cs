@@ -30,7 +30,8 @@ namespace NutritionControl.DataAccess.Configuration
             this.AddConfig(new ProductsInitializer());
             this.AddConfig(new AdditionalInfoInitializer());
             this.AddConfig(new DiaryInitializer());
-		}
+            this.AddConfig(new ReceiptsInitializer());
+        }
 
         public void AddConfig(ITypeInitializer typeInitializer)
         {

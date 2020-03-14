@@ -53,8 +53,9 @@ namespace NutritionControl.API
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IDiaryService, DiaryService>();
+            services.AddScoped<IReceiptsService, ReceiptsService>();
 
-			services.AddIdentity<User, IdentityRole<int>>(opts =>
+            services.AddIdentity<User, IdentityRole<int>>(opts =>
             {
                 opts.Password.RequiredLength = 4;
                 opts.Password.RequireNonAlphanumeric = false;

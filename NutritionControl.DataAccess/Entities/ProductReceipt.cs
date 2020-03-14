@@ -7,8 +7,11 @@ namespace NutritionControl.DataAccess.Entities
     public class ProductReceipt : IBaseEntity
     {
         public int Id { get; set; }
+        public double Count { get; set; }
+        public string Measurment { get; set; }
 
         /* Navigation Properties */
+
 
         public int ReceiptId { get; set; }
         public virtual Receipt Receipt { get; set; }
