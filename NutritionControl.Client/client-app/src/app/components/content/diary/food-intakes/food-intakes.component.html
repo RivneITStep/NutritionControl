@@ -1,0 +1,78 @@
+<div class="card">
+  <h3 class="card-header">
+    Food Intakes
+  </h3>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-xl-8 col-12">
+        <ngb-accordion #acc="ngbAccordion">
+          <ngb-panel id="toggle-1" title="Add new food intake">
+            <ng-template ngbPanelContent>
+             <div>
+              <div class="form-group">
+                <label for="typeahead-basic">Search for a product:</label>
+                <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="selectedProduct"
+                  [inputFormatter]="formatter" [ngbTypeahead]="searchProduct" [resultTemplate]="rt" />
+              </div>
+              <div class="form-group">
+                <label class="custom-control custom-radio">
+                  <input value="Breakfast" [(ngModel)]="intakeType" type="radio" name="radio-inline"
+                    class="custom-control-input"><span class="custom-control-label">Breakfast</span>
+                </label>
+                <label class="custom-control custom-radio">
+                  <input value="Second Breakfast" [(ngModel)]="intakeType" type="radio" name="radio-inline"
+                    class="custom-control-input"><span class="custom-control-label">Second Breakfast</span>
+                </label>
+                <label class="custom-control custom-radio">
+                  <input value="Lunch" [(ngModel)]="intakeType" type="radio" name="radio-inline"
+                    class="custom-control-input"><span class="custom-control-label">Lunch</span>
+                </label>
+                <label class="custom-control custom-radio">
+                  <input value="Dinner" [(ngModel)]="intakeType" type="radio" name="radio-inline" checked=""
+                    class="custom-control-input"><span class="custom-control-label">Dinner</span>
+                </label>
+              </div>
+              <div class="form-group">
+                <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
+              </div>
+             </div>
+            </ng-template>
+          </ngb-panel>
+          <ngb-panel id="toggle-2" title="Food intakes">
+            <ng-template ngbPanelContent>
+              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
+              aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
+              sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
+              craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+              occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
+              labore sustainable VHS.
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>
+      <div class="col-xl-4 col-12">
+        <ngb-datepicker #dp [(ngModel)]="selectedDate" (navigate)="date = $event.next"></ngb-datepicker>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #rt let-r="result" let-t="term">
+  <div class="products-result">
+    <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+    <div class="d-flex align-items-center">
+      <div class="w-25 product-value">
+        PR: {{r.protein}}
+      </div>
+      <div class="w-25 product-value">
+        CR: {{r.carbohydrates}}
+      </div>
+      <div class="w-25 product-value">
+        FT: {{r.fats}}
+      </div>
+      <div class="w-25 product-value text-success font-weight-bold">
+        CL: {{r.caloriesValue}}
+      </div>
+    </div>
+  </div>
+</ng-template>

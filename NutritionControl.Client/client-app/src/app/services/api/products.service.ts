@@ -12,4 +12,8 @@ export class ProductsService {
   getGrouped() {
     return this.http.get(API_ROUTES.products + 'getGrouped');
   }
+
+  getAll() {
+    return this.http.get(API_ROUTES.products);
+  }
 }

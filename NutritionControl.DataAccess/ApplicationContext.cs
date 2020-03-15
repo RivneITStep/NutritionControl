@@ -18,6 +18,7 @@ namespace NutritionControl.DataAccess
         public DbSet<WaterValue> WaterValues { get; set; }
         public DbSet<FoodIntake> FoodIntakes { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
+		//public DbSet<FoodIntakeProduct> FoodIntakeProducts { get; set; }
 
         #endregion
 
@@ -25,6 +26,8 @@ namespace NutritionControl.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+			/* Product -> Receipts */
+			
             modelBuilder.Entity<ProductReceipt>()
                .HasKey(t => new { t.ProductId, t.ReceiptId });
 
@@ -38,18 +41,37 @@ namespace NutritionControl.DataAccess
                 .WithMany(p => p.Products)
                 .HasForeignKey(pr => pr.ReceiptId);
 
+			/* User -> UserAdditional Info */
+
             modelBuilder.Entity<User>()
                 .HasOne(u => u.UserAdditionalInfo)
                 .WithOne(ui => ui.User)
                 .HasForeignKey<UserAdditionalInfo>(ui => ui.UserId);
 
-            modelBuilder.Entity<User>()
+            /* User -> RefreshToken */
+
+			modelBuilder.Entity<User>()
                .HasOne(u => u.RefreshToken)
                .WithOne(rt => rt.User)
                .HasForeignKey<RefreshToken>(rt => rt.UserId);
 
 
-            base.OnModelCreating(modelBuilder);
+
+			//modelBuilder.Entity<FoodIntakeProduct>()
+			//	.HasKey(t => new { t.ProductId, t.FoodIntakeId });
+
+			//modelBuilder.Entity<FoodIntakeProduct>()
+			//	.HasOne(fir => fir.FoodIntake)
+			//	.WithMany(p => p.Products)
+			//	.HasForeignKey(pr => pr.FoodIntakeId);
+
+			//modelBuilder.Entity<FoodIntakeProduct>()
+			//	.HasOne(fir => fir.Product)
+			//	.WithMany(p => p.FoodIntakes)
+			//	.HasForeignKey(pr => pr.ProductId);
+
+
+			base.OnModelCreating(modelBuilder);
         }
     }
 }

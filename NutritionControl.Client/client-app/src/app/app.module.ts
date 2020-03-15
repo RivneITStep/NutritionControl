@@ -10,6 +10,7 @@ import { WelcomeComponent } from './components/theme/layout/welcome/welcome.comp
 import { SharedModule } from './components/shared/shared.module';
 import { ErrorHandlingInterceptor } from './helpers/interceptors/errorHandling.interceptor';
 import { CalculatorComponent } from './components/content/calculator/calculator.component';
+import { FoodIntakesComponent } from './components/content/diary/food-intakes/food-intakes.component';
 
 const routes: Routes = [
   {
@@ -25,10 +26,10 @@ const routes: Routes = [
     path: APP_ROUTES.auth,
     loadChildren: () => import('./components/auth/auth.module').then(m => m.AuthModule)
   },
-  // {
-  //   path: APP_ROUTES.admin,
-  //   loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
-  // },
+  {
+    path: APP_ROUTES.admin,
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+  },
   {
     path: '**',
     redirectTo: ''

@@ -24,6 +24,6 @@ namespace NutritionControl.DataAccess.Entities
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public ICollection<ProductReceipt> Receipts { get; set; }
-
+        public ICollection<FoodIntake> FoodIntakes { get; set; }
     }
 }
