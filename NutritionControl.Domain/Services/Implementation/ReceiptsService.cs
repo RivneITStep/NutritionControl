@@ -9,13 +9,16 @@ using System.Threading.Tasks;
 
 namespace NutritionControl.Domain.Services.Implementation
 {
-    public class ReceiptsService:IReceiptsService
+    public class ReceiptsService : IReceiptsService
     {
         private readonly IGenericRepository<Receipt> _repository;
-       
-        public ReceiptsService(IGenericRepository<Receipt> repository)                    
+        private readonly IGenericRepository<CategoryReceipt> _categoryRepository;
+
+        public ReceiptsService(IGenericRepository<Receipt> repository,
+                               IGenericRepository<CategoryReceipt> categoryRepository)
         {
             _repository = repository;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<ResultDto> GetReceipts()
@@ -25,7 +28,9 @@ namespace NutritionControl.Domain.Services.Implementation
                 Description = x.Description,
                 Name = x.Name,
                 Id = x.Id,
-                Calories=x.Products.Sum(prod=>(prod.Product.CaloriesValue*Convert.ToDecimal(prod.Count))),
+                Calories = x.Products.Sum(prod => (prod.Product.CaloriesValue * Convert.ToDecimal(prod.Count))),
+                CategoryName = x.Category.Name,
+                PhotoUrl=x.PhotoUrl,
                 Products = x.Products.Select(prod => new ProductReceiptDto
                 {
                     Count = prod.Count,
@@ -47,7 +52,53 @@ namespace NutritionControl.Domain.Services.Implementation
             {
                 Count = res.Count(),
                 Data = res.ToList(),
-                IsSuccessful=true
+                IsSuccessful = true
+            };
+        }
+        public async Task<ResultDto> Add(ReceiptDto model)
+        {
+            try
+            {
+                var receipt = new Receipt
+                {
+                    Id = model.Id,
+                    Name = model.Name,
+                    Description = model.Description,
+                    Category = await _categoryRepository.GetSingle(x => x.Name == model.CategoryName) ??
+                               new CategoryReceipt { Name = model.CategoryName }
+                };
+                await _repository.Create(receipt);
+            }
+            catch(Exception)
+            {
+                return new ResultDto
+                {
+                    IsSuccessful = false,
+                    Message = "Error"
+                };
+            }
+
+            return new ResultDto
+            {
+                IsSuccessful = true
+            };
+        }
+        public async Task<ResultDto> Delete(int id)
+        {
+            var receipt = await _repository.Find(id);
+            if(receipt==null)
+            {
+                return new ResultDto
+                {
+                    IsSuccessful = false,
+                    Message = "Error"
+                };
+            }
+            await _repository.Delete(receipt);
+            return new ResultDto
+            {
+                IsSuccessful = true,
+                Message = "Receipt was successfully deleted"
             };
         }
     }

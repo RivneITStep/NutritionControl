@@ -11,6 +11,7 @@ namespace NutritionControl.DataAccess
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<CategoryReceipt> CategoryReceipts { get; set; }
         public DbSet<Receipt> Receipts { get; set; }
         public DbSet<ProductReceipt> ProductReceipts { get; set; }
         public DbSet<UserAdditionalInfo> UserAdditionalInfos { get; set; }
