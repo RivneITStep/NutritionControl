@@ -27,10 +27,12 @@ namespace NutritionControl.DataAccess.Configuration
             //add concrete initializers
             //order is IMPORTANT (for example, you first need to add categories and only then products that are category-dependent)
             this.AddConfig(new CategoriesInitializer());
+            this.AddConfig(new CategoryReceiptsInitializer());
             this.AddConfig(new ProductsInitializer());
             this.AddConfig(new AdditionalInfoInitializer());
             this.AddConfig(new DiaryInitializer());
             this.AddConfig(new ReceiptsInitializer());
+            
         }
 
         public void AddConfig(ITypeInitializer typeInitializer)
