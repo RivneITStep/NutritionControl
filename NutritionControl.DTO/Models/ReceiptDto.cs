@@ -8,10 +8,8 @@ namespace NutritionControl.DTO.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string PhotoUrl { get; set; }
         public string Description { get; set; }
         public decimal Calories { get; set; }
-        public string CategoryName { get; set; }
         public List<ProductReceiptDto> Products { get; set; }
     }
     public class ProductReceiptDto

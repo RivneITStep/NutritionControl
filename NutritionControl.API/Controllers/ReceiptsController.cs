@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NutritionControl.Domain.Services.Interfaces;
 using NutritionControl.DTO.DtoResults;
-using NutritionControl.DTO.Models;
 
 namespace NutritionControl.API.Controllers
 {
@@ -34,16 +33,6 @@ namespace NutritionControl.API.Controllers
                     Message = "Something goes wrong"
                 };
             }
-        }
-        [HttpPost]
-        public async Task<ResultDto> AddReceipt (ReceiptDto model)
-        {
-            return await _receiptsService.Add(model);
-        }
-        [HttpDelete]
-        public async Task<ResultDto> DeleteReceipt(int id)
-        {
-            return await _receiptsService.Delete(id);
         }
     }
 }
