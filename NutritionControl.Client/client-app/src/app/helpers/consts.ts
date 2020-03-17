@@ -5,7 +5,8 @@ export const API_ROUTES = {
     login: API_PATH + "auth/login/",
     products: API_PATH + "products/",
     account: API_PATH + "account/",
-    diary: API_PATH + "diary/"
+    diary: API_PATH + "diary/",
+    receipts: API_PATH + "receipts/"
 }
 
 export const ACCESS_TOKEN: string = "access_token";

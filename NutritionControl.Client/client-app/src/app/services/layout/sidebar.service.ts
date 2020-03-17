@@ -28,12 +28,12 @@ export class SidebarService {
     },
     {
       routerLink: "",
-      text: "Fav. Recipes",
+      text: "Fav. Receipts",
       icon: "fas fa-star pb-1"
     },
     {
-      routerLink: "",
-      text: "Recipes",
+      routerLink: "receipts",
+      text: "Receipts",
       icon: "fas fa-clipboard-list pb-1"
     },
     {

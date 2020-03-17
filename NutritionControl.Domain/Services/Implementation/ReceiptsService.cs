@@ -4,6 +4,7 @@ using NutritionControl.Domain.Services.Interfaces;
 using NutritionControl.DTO.DtoResults;
 using NutritionControl.DTO.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,13 +13,16 @@ namespace NutritionControl.Domain.Services.Implementation
     public class ReceiptsService : IReceiptsService
     {
         private readonly IGenericRepository<Receipt> _repository;
+        private readonly IGenericRepository<Product> _productRepository;
         private readonly IGenericRepository<CategoryReceipt> _categoryRepository;
 
         public ReceiptsService(IGenericRepository<Receipt> repository,
-                               IGenericRepository<CategoryReceipt> categoryRepository)
+                               IGenericRepository<CategoryReceipt> categoryRepository,
+                               IGenericRepository<Product> productRepository)
         {
             _repository = repository;
             _categoryRepository = categoryRepository;
+            _productRepository = productRepository;
         }
 
         public async Task<ResultDto> GetReceipts()
@@ -30,7 +34,7 @@ namespace NutritionControl.Domain.Services.Implementation
                 Id = x.Id,
                 Calories = x.Products.Sum(prod => (prod.Product.CaloriesValue * Convert.ToDecimal(prod.Count))),
                 CategoryName = x.Category.Name,
-                PhotoUrl=x.PhotoUrl,
+                PhotoUrl = x.PhotoUrl,
                 Products = x.Products.Select(prod => new ProductReceiptDto
                 {
                     Count = prod.Count,
@@ -64,9 +68,20 @@ namespace NutritionControl.Domain.Services.Implementation
                     Id = model.Id,
                     Name = model.Name,
                     Description = model.Description,
+                    PhotoUrl = model.PhotoUrl,
                     Category = await _categoryRepository.GetSingle(x => x.Name == model.CategoryName) ??
-                               new CategoryReceipt { Name = model.CategoryName }
+                               new CategoryReceipt { Name = model.CategoryName },
+                    Products = new List<ProductReceipt>()
                 };
+                for (int i = 0; i < model.Products.Count; i++)
+                {
+                    receipt.Products.Add(new ProductReceipt
+                    {
+                        Product = await _productRepository.GetSingle(x => x.Name == model.Products[i].Product.Name),
+                        Measurment = model.Products[i].Measurment,
+                        Count = model.Products[i].Count
+                    });
+                }
                 await _repository.Create(receipt);
             }
             catch(Exception)
@@ -100,6 +115,52 @@ namespace NutritionControl.Domain.Services.Implementation
                 IsSuccessful = true,
                 Message = "Receipt was successfully deleted"
             };
+        }
+        public async Task<ResultDto> Edit(ReceiptDto model)
+        {
+            try
+            {
+                var receipt = await _repository.GetSingle(x => x.Id == model.Id, x => x.Products);
+                if (receipt == null)
+                {
+                    return new ResultDto
+                    {
+                        IsSuccessful = false,
+                        Message = "Error"
+                    };
+                }
+                receipt.Name = model.Name;
+                receipt.PhotoUrl = model.PhotoUrl;
+                receipt.Description = model.Description;
+                receipt.Category = await _categoryRepository.GetSingle(x => x.Name == model.CategoryName) ??
+                                   new CategoryReceipt { Name = model.CategoryName };
+                for (int i = 0; i < model.Products.Count; i++)
+                {
+                    if (receipt.Products.FirstOrDefault(x => x.ProductId == model.Products[i].Product.Id) == null)
+                    {
+                        receipt.Products.Add(new ProductReceipt
+                        {
+                            Product = await _productRepository.GetSingle(x => x.Name == model.Products[i].Product.Name),
+                            Measurment = model.Products[i].Measurment,
+                            Count = model.Products[i].Count
+                        });
+                    }
+                }
+                await _repository.Update(receipt);
+                return new ResultDto
+                {
+                    IsSuccessful = true,
+                    Message = "Receipt was succssfully updated"
+                };
+            }
+            catch(Exception ex)
+            {
+                return new ResultDto
+                {
+                    IsSuccessful = false,
+                    Message = ex.ToString()
+                };
+            }
         }
     }
 }

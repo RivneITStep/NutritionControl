@@ -10,6 +10,7 @@ import { WelcomeComponent } from './components/theme/layout/welcome/welcome.comp
 import { SharedModule } from './components/shared/shared.module';
 import { ErrorHandlingInterceptor } from './helpers/interceptors/errorHandling.interceptor';
 import { CalculatorComponent } from './components/content/calculator/calculator.component';
+import { ReceiptsComponent } from './components/content/receipts/receipts.component';
 
 const routes: Routes = [
   {
@@ -38,7 +39,7 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,

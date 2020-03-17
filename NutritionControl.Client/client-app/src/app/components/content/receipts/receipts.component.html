@@ -1,0 +1,17 @@
+<div class="row">
+  <div *ngFor="let receipt of receipts" class="col-lg-6 col-12">
+    <div class="card">
+      <h2 class="card-header">
+          {{receipt.name}}
+          <div style="float:right">
+            {{receipt.calories}}
+          </div>
+      </h2>
+      <div class="card-body">
+        <ul>
+          <li *ngFor="let prod of receipt.products">{{prod.product.name}}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

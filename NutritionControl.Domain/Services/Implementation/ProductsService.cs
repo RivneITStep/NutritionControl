@@ -58,7 +58,7 @@ namespace NutritionControl.Domain.Services.Implementation
 
         public async Task<ResultDto> Edit(ProductDto model)
         {
-	        var product = await _repository.Find((model.Id));
+	        var product = await _repository.Find(model.Id);
 
 	        if (product == null)
 		        return new ResultDto

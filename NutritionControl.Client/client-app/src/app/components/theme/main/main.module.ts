@@ -12,6 +12,7 @@ import { DiaryComponent } from '../../content/diary/diary.component';
 import { WeightInfosComponent } from '../../content/diary/weight-infos/weight-infos.component';
 import { WaterValuesComponent } from '../../content/diary/water-values/water-values.component';
 import { CalculatorComponent } from '../../content/calculator/calculator.component';
+import { ReceiptsComponent } from '../../content/receipts/receipts.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'calculator',
         component: CalculatorComponent
+      },
+      {
+        path: 'receipts',
+        component: ReceiptsComponent
       }
     ]
   }
@@ -54,7 +59,8 @@ const routes: Routes = [
     DiaryComponent,
     WeightInfosComponent,
     WaterValuesComponent,
-    CalculatorComponent
+    CalculatorComponent,
+    ReceiptsComponent
   ],
   imports: [
     SharedModule,

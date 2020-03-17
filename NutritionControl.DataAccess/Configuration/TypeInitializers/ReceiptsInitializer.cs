@@ -41,6 +41,27 @@ namespace NutritionControl.DataAccess.Configuration.TypeInitializers
                 Measurment = "gr"
             });
             await context.Set<Receipt>().AddAsync(r);
+            Receipt r1 = new Receipt
+            {
+                Description = "sdffdsf",
+                Name = "Soup z banana",
+                Category = categorySoups,
+                PhotoUrl = "test.jpg",
+                Products = new List<ProductReceipt>()
+            };
+            r1.Products.Add(new ProductReceipt
+            {
+                Product = await context.Set<Product>().FirstOrDefaultAsync(x => x.Name == "Potato"),
+                Count = 5,
+                Measurment = "gr"
+            });
+            r1.Products.Add(new ProductReceipt
+            {
+                Product = await context.Set<Product>().FirstOrDefaultAsync(x => x.Name == "Banana"),
+                Count = 1,
+                Measurment = "gr"
+            });
+            await context.Set<Receipt>().AddAsync(r1);
         }
     }
 }

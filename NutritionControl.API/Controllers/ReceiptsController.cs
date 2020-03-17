@@ -45,5 +45,10 @@ namespace NutritionControl.API.Controllers
         {
             return await _receiptsService.Delete(id);
         }
+        [HttpPut]
+        public async Task<ResultDto> EditReceipt(ReceiptDto model)
+        {
+            return await _receiptsService.Edit(model);
+        }
     }
 }
