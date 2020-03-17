@@ -25,7 +25,6 @@ export class ErrorHandlingInterceptor implements HttpInterceptor {
           }
         },
         err => {
-          this.alertifyService.error(err);
           if (err instanceof HttpErrorResponse) {
             if (err.status == 401) {
               this.alertifyService.error("You need to authorize");

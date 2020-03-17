@@ -34,6 +34,20 @@ namespace NutritionControl.DataAccess.Configuration.TypeInitializers
 					Value = r.Next(2500,3500)
 				});
 			}
+
+			await initFoodIntakes(context, user);
+		}
+
+		private async Task initFoodIntakes(DbContext context, User user)
+		{
+			await context.Set<FoodIntake>().AddAsync(new FoodIntake
+			{
+				Type = "Dinner",
+				DateOfIntake = DateTime.Now,
+				Product = await context.Set<Product>().FirstOrDefaultAsync(p => p.Name == "Potato"),
+				FoodWeight = 500,
+				User = user
+			});
 		}
 	}
 }

@@ -12,6 +12,7 @@ import { DiaryComponent } from '../../content/diary/diary.component';
 import { WeightInfosComponent } from '../../content/diary/weight-infos/weight-infos.component';
 import { WaterValuesComponent } from '../../content/diary/water-values/water-values.component';
 import { CalculatorComponent } from '../../content/calculator/calculator.component';
+import { FoodIntakesComponent } from '../../content/diary/food-intakes/food-intakes.component';
 import { ReceiptsComponent } from '../../content/receipts/receipts.component';
 
 const routes: Routes = [
@@ -59,6 +60,7 @@ const routes: Routes = [
     DiaryComponent,
     WeightInfosComponent,
     WaterValuesComponent,
+    FoodIntakesComponent
     CalculatorComponent,
     ReceiptsComponent
   ],
