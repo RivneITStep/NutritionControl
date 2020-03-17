@@ -60,7 +60,7 @@ const routes: Routes = [
     DiaryComponent,
     WeightInfosComponent,
     WaterValuesComponent,
-    FoodIntakesComponent
+    FoodIntakesComponent,
     CalculatorComponent,
     ReceiptsComponent
   ],
