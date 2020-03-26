@@ -1,17 +1,17 @@
 <div class="row">
   <div *ngFor="let receipt of receipts" class="col-lg-6 col-12">
-    <div class="card">
+    <div class="card h-100">
       <h2 class="card-header">
-          {{receipt.name}}
-          <div style="float:right">
-            {{receipt.calories}}
-          </div>
+            {{receipt.name}}
       </h2>
       <div class="card-body">
-        <ul>
-          <li *ngFor="let prod of receipt.products">{{prod.product.name}}</li>
-        </ul>
-      </div>
+        <img class="card-img" src="https://www.tarikasingh.com/wp-content/uploads/2016/07/easy-one-pot-rice-dish-tehri-or-taheri-from-uttar-pradesh.1024x1024-1024x682.jpg">
+        <div class="card-description">
+          <p>{{receipt.description | slice:0:70}}...</p>
+        </div>
+        <!-- <div class="card-description">
+        <p >{{receipt.description |slice:0:50}}... </p>
+        </div> -->
     </div>
   </div>
 </div>

@@ -22,7 +22,7 @@ namespace NutritionControl.DataAccess.Configuration.TypeInitializers
 
             Receipt r = new Receipt
             {
-                Description = "sdffdsf",
+                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu sem integer vitae justo eget magna fermentum.",
                 Name = "Soup z kartohi",
                 Category= categorySoups,
                 PhotoUrl="test.jpg",
@@ -43,7 +43,7 @@ namespace NutritionControl.DataAccess.Configuration.TypeInitializers
             await context.Set<Receipt>().AddAsync(r);
             Receipt r1 = new Receipt
             {
-                Description = "sdffdsf",
+                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Eu sem integer vitae justo eget magna fermentum.",
                 Name = "Soup z banana",
                 Category = categorySoups,
                 PhotoUrl = "test.jpg",

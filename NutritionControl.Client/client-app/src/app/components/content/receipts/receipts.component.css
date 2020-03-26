@@ -1,0 +1,31 @@
+.card-header{
+  background-color: rgb(221, 221, 231);  
+}
+.card{
+  background-color: rgb(228, 226, 235);
+  
+}
+.card-img{
+  max-height: 350px;
+  width: auto;
+  max-width: 100%;
+  margin: 0;
+}
+
+.card-body{
+  
+  padding: 0;
+  text-align: center;
+}
+.card-description{
+  padding: 15px;
+  text-align: left;
+  font-size: 21px;
+  background-color: rgba(0, 0, 0, 0.55);
+  z-index: 500;
+  position: absolute;
+  bottom: 0;
+  height:30%;
+  width: 100%;
+  color:rgb(241, 150, 114);
+}
