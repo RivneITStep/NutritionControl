@@ -26,7 +26,8 @@ export class ProductsCrudComponent implements OnInit {
     categoryName: "",
     fats: 0,
     id: 0,
-    protein: 0 
+    protein: 0,
+    isLiked: false
   };
 
   constructor(private productsCrudService: ProductsCrudService,

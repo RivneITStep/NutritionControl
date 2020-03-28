@@ -18,6 +18,7 @@ namespace NutritionControl.DataAccess
         public DbSet<WeightInfo> WeightInfos { get; set; }
         public DbSet<WaterValue> WaterValues { get; set; }
         public DbSet<FoodIntake> FoodIntakes { get; set; }
+        public DbSet<ProductLike> ProductLikes { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 		//public DbSet<FoodIntakeProduct> FoodIntakeProducts { get; set; }
 
@@ -42,7 +43,22 @@ namespace NutritionControl.DataAccess
                 .WithMany(p => p.Products)
                 .HasForeignKey(pr => pr.ReceiptId);
 
-			/* User -> UserAdditional Info */
+            /* Product -> User (Likes) */
+
+            modelBuilder.Entity<ProductLike>()
+               .HasKey(t => new { t.ProductId, t.UserId });
+
+            modelBuilder.Entity<ProductLike>()
+                .HasOne(pr => pr.Product)
+                .WithMany(p => p.ProductLikes)
+                .HasForeignKey(pr => pr.ProductId);
+
+            modelBuilder.Entity<ProductLike>()
+                .HasOne(pr => pr.User)
+                .WithMany(p => p.ProductLikes)
+                .HasForeignKey(pr => pr.UserId);
+
+            /* User -> UserAdditional Info */
 
             modelBuilder.Entity<User>()
                 .HasOne(u => u.UserAdditionalInfo)

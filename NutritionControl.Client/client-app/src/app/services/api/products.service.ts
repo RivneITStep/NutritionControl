@@ -16,4 +16,8 @@ export class ProductsService {
   getAll() {
     return this.http.get(API_ROUTES.products);
   }
+
+  likeProduct(id: number) {
+    return this.http.get(API_ROUTES.products + 'like?productId=' +id);
+  }
 }
