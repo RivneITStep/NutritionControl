@@ -34,6 +34,9 @@ namespace NutritionControl.Domain.Services.Implementation
                 Name = x.Name,
                 Id = x.Id,
                 Calories = x.Products.Sum(prod => (prod.Product.CaloriesValue * Convert.ToDecimal(prod.Count))),
+                Protein = x.Products.Sum(prod => (prod.Product.Protein * Convert.ToDecimal(prod.Count))),
+                Carbohydrates = x.Products.Sum(prod => (prod.Product.Carbohydrates * Convert.ToDecimal(prod.Count))),
+                Fats = x.Products.Sum(prod => (prod.Product.Fats * Convert.ToDecimal(prod.Count))),
                 CategoryName = x.Category.Name,
                 PhotoUrl = x.PhotoUrl,
                 Products = x.Products.Select(prod => new ProductReceiptDto
@@ -70,6 +73,9 @@ namespace NutritionControl.Domain.Services.Implementation
                 Name = x.Name,
                 Id = x.Id,
                 Calories = x.Products.Sum(prod => (prod.Product.CaloriesValue * Convert.ToDecimal(prod.Count))),
+                Protein = x.Products.Sum(prod => (prod.Product.Protein * Convert.ToDecimal(prod.Count))),
+                Carbohydrates = x.Products.Sum(prod => (prod.Product.Carbohydrates * Convert.ToDecimal(prod.Count))),
+                Fats = x.Products.Sum(prod => (prod.Product.Fats * Convert.ToDecimal(prod.Count))),
                 CategoryName = x.Category.Name,
                 PhotoUrl = x.PhotoUrl,
                 Products = x.Products.Select(prod => new ProductReceiptDto

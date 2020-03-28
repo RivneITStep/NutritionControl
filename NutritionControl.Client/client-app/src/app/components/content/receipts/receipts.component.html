@@ -1,14 +1,17 @@
 <div class="row">
   <div *ngFor="let receipt of receipts" class="col-lg-6 col-12">
-    <div [routerLink]="['/main/receipts', receipt.id]" class="card h-100">
+    <div [routerLink]="['/main/receipts', receipt.id]" class="card pointer">
       <h2 class="card-header">
-            {{receipt.name}}
+        {{receipt.name}}
       </h2>
       <div class="card-body">
-        <img class="card-img" src="https://www.tarikasingh.com/wp-content/uploads/2016/07/easy-one-pot-rice-dish-tehri-or-taheri-from-uttar-pradesh.1024x1024-1024x682.jpg">
-        <div class="card-description">
-          <p>{{receipt.description | slice:0:70}}...</p>
+        <img class="card-img"
+          src="https://www.tarikasingh.com/wp-content/uploads/2016/07/easy-one-pot-rice-dish-tehri-or-taheri-from-uttar-pradesh.1024x1024-1024x682.jpg"
+          alt="Card image">
+        <div class="card-img-overlay align-items-center">
+          <p class="card-description">{{receipt.description | slice:0:70}}...</p>
         </div>
+      </div>
     </div>
   </div>
 </div>

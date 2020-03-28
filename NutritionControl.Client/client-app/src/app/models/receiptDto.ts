@@ -12,6 +12,9 @@ export class ReceiptDto {
   photoUrl: string
   description: string
   calories: number
+  protein:number
+  fats:number
+  carbohydrates:number
   categoryName: string
   method: string
   products: Array<ProductReceiptDto>

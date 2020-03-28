@@ -1,30 +1,20 @@
+.card-body{
+  position: relative;
+  padding:0;
+}
 .card-header{
   background-color: rgb(221, 221, 231);  
 }
-.card{
-  background-color: rgb(228, 226, 235);
-  
-}
 .card-img{
-  width: auto;
-  max-width: 100%;
-  margin: 0;
-}
-
-.card-body{
-  
-  padding: 0;
-  text-align: center;
+  margin:0;
 }
 .card-description{
   padding: 15px;
   text-align: left;
-  font-size: 19px;
-  background-color: rgba(0, 0, 0, 0.55);
-  z-index: 500;
-  position: absolute;
-  bottom: 0;
-  height:30%;
-  width: 100%;
-  color:rgb(241, 150, 114);
+  font-size: 17px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color:rgb(238, 104, 51);
+  margin-right: -20px;
+  margin-left: -20px;
+  margin-top: 45%;
 }

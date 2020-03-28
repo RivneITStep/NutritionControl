@@ -1,0 +1,46 @@
+<div class="image-section">
+  <img class="main-img"
+    src="http://www.weightloss.com.au/assets/Uploads/Recipes/spanish-fish-stew-lge.jpg">
+  <div class="img-overlay margins">
+    <h2>{{receipt.name}}</h2>
+    <p>{{receipt.description}}</p>
+  </div>
+</div>
+
+<div class="nutrition-blocks margins">
+  <div class="row mt-3">
+    <div class="nutrition-item col-lg-3 col-12">
+      <div class="nutrition-item-title ">CAL P/100g</div>
+      <div class="nutrition-item-value">{{receipt.calories}}</div>
+    </div>
+    <div class="nutrition-item col-lg-3 col-12">
+      <div class="nutrition-item-title ">FAT P/100g</div>
+      <div class="nutrition-item-value">{{receipt.fats}}</div>
+    </div>
+    <div class="nutrition-item col-lg-3 col-12">
+      <div class="nutrition-item-title ">CARBS P/100g</div>
+      <div class="nutrition-item-value">{{receipt.carbohydrates}}</div>
+    </div>
+    <div class="nutrition-item col-lg-3 col-12">
+      <div class="nutrition-item-title ">PROTEIN P/100g</div>
+      <div class="nutrition-item-value">{{receipt.protein}}</div>
+    </div>
+  </div>
+</div>
+<br>
+<div class="line margins"></div>
+<br>
+<div class="ingredients margins">
+  <h1>Ingredients</h1>
+  <ul>
+    <li *ngFor="let product of receipt.products">{{product.count}} {{product.measurment}}
+      {{product.product.name.toLowerCase()}}</li>
+  </ul>
+</div>
+<br>
+<div class="line margins"></div>
+<br>
+<div class="method margins">
+  <h1>Method</h1>
+  <p>{{receipt.method}}</p>
+</div>

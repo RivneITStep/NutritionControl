@@ -11,6 +11,10 @@ namespace NutritionControl.DTO.Models
         public string PhotoUrl { get; set; }
         public string Description { get; set; }
         public decimal Calories { get; set; }
+        public decimal Fats { get; set; }
+        public decimal Carbohydrates { get; set; }
+        public decimal Protein { get; set; }
+
         public string CategoryName { get; set; }
         public string Method { get; set; }
         public List<ProductReceiptDto> Products { get; set; }
