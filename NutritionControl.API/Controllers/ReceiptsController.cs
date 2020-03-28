@@ -35,6 +35,22 @@ namespace NutritionControl.API.Controllers
                 };
             }
         }
+        [HttpGet("getReceipt")]
+        public async Task<ResultDto> GetReceipt(int id)
+        {
+            try
+            {
+                return await _receiptsService.GetReceipt(id);
+            }
+            catch (Exception ex)
+            {
+                return new ResultDto
+                {
+                    IsSuccessful = false,
+                    Message = ex.ToString()
+                };
+            }
+        }
         [HttpPost]
         public async Task<ResultDto> AddReceipt (ReceiptDto model)
         {

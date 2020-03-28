@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReceiptsService } from 'src/app/services/api/receipts.service';
 import { ApiCollectionResponse } from 'src/app/models/apiResponse';
+import { ReceiptDto } from 'src/app/models/receiptDto';
 
 @Component({
   selector: 'app-receipts',
@@ -9,7 +10,7 @@ import { ApiCollectionResponse } from 'src/app/models/apiResponse';
 })
 export class ReceiptsComponent implements OnInit {
 
-  receipts: Array<any>;
+  receipts: Array<ReceiptDto>;
 
   constructor(private receiptsService: ReceiptsService) { }
 

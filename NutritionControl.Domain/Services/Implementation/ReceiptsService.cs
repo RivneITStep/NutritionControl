@@ -30,6 +30,7 @@ namespace NutritionControl.Domain.Services.Implementation
             var res = await _repository.GetAllSelect<ReceiptDto>(x => new ReceiptDto
             {
                 Description = x.Description,
+                Method = x.Method,
                 Name = x.Name,
                 Id = x.Id,
                 Calories = x.Products.Sum(prod => (prod.Product.CaloriesValue * Convert.ToDecimal(prod.Count))),
@@ -59,6 +60,50 @@ namespace NutritionControl.Domain.Services.Implementation
                 IsSuccessful = true
             };
         }
+
+        public async Task<ResultDto> GetReceipt(int id)
+        {
+            var receipt = await _repository.GetAllSelect<ReceiptDto>(x => new ReceiptDto
+            {
+                Description = x.Description,
+                Method = x.Method,
+                Name = x.Name,
+                Id = x.Id,
+                Calories = x.Products.Sum(prod => (prod.Product.CaloriesValue * Convert.ToDecimal(prod.Count))),
+                CategoryName = x.Category.Name,
+                PhotoUrl = x.PhotoUrl,
+                Products = x.Products.Select(prod => new ProductReceiptDto
+                {
+                    Count = prod.Count,
+                    Measurment = prod.Measurment,
+                    Product = new ProductDto
+                    {
+                        Id = prod.Product.Id,
+                        CaloriesValue = prod.Product.CaloriesValue,
+                        CategoryName = prod.Product.Category.Name,
+                        Name = prod.Product.Name,
+                        Carbohydrates = prod.Product.Carbohydrates,
+                        Fats = prod.Product.Fats,
+                        PhotoUrl = prod.Product.PhotoUrl,
+                        Protein = prod.Product.Protein
+                    }
+                }).ToList()
+            }, x => x.Id == id, x => x.Products);
+            if (receipt == null)
+            {
+                return new ResultDto
+                {
+                    IsSuccessful = false,
+                    Message = "Wrong id"
+                };
+            }
+            return new SingleResultDto<ReceiptDto>
+            {
+                IsSuccessful = true,
+                Data = receipt.First()
+            };
+        }
+
         public async Task<ResultDto> Add(ReceiptDto model)
         {
             try
@@ -66,6 +111,7 @@ namespace NutritionControl.Domain.Services.Implementation
                 var receipt = new Receipt
                 {
                     Id = model.Id,
+                    Method=model.Method,
                     Name = model.Name,
                     Description = model.Description,
                     PhotoUrl = model.PhotoUrl,
@@ -84,7 +130,7 @@ namespace NutritionControl.Domain.Services.Implementation
                 }
                 await _repository.Create(receipt);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return new ResultDto
                 {
@@ -101,7 +147,7 @@ namespace NutritionControl.Domain.Services.Implementation
         public async Task<ResultDto> Delete(int id)
         {
             var receipt = await _repository.Find(id);
-            if(receipt==null)
+            if (receipt == null)
             {
                 return new ResultDto
                 {
@@ -130,6 +176,7 @@ namespace NutritionControl.Domain.Services.Implementation
                     };
                 }
                 receipt.Name = model.Name;
+                receipt.Method = model.Method;
                 receipt.PhotoUrl = model.PhotoUrl;
                 receipt.Description = model.Description;
                 receipt.Category = await _categoryRepository.GetSingle(x => x.Name == model.CategoryName) ??
@@ -153,7 +200,7 @@ namespace NutritionControl.Domain.Services.Implementation
                     Message = "Receipt was succssfully updated"
                 };
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new ResultDto
                 {

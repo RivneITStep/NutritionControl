@@ -12,6 +12,7 @@ namespace NutritionControl.DTO.Models
         public string Description { get; set; }
         public decimal Calories { get; set; }
         public string CategoryName { get; set; }
+        public string Method { get; set; }
         public List<ProductReceiptDto> Products { get; set; }
     }
     public class ProductReceiptDto
