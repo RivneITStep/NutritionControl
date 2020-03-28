@@ -14,5 +14,6 @@ namespace NutritionControl.DTO.Models
         public decimal Fats { get; set; }
         public decimal Carbohydrates { get; set; }
         public string CategoryName { get; set; }
+        public bool IsLiked { get; set; }
     }
 }

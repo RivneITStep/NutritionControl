@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/services/api/products.service';
-import { GroupedProducts } from 'src/app/models/productDto';
+import { GroupedProducts, ProductDto } from 'src/app/models/productDto';
+import { ApiResponse } from 'src/app/models/apiResponse';
+import { AlertifyService } from 'src/app/services/layout/alertify.service';
 
 @Component({
   selector: 'app-grouped-products',
@@ -13,8 +15,10 @@ export class GroupedProductsComponent implements OnInit {
   categories: Array<string>;
 
   selectedCategory: string = "";
+  isCategoriesVisible: boolean = true;
 
-  constructor(private productsService: ProductsService) { }
+  constructor(private productsService: ProductsService,
+              private alertifyService: AlertifyService) { }
 
   ngOnInit() {
     this.productsService.getGrouped()
@@ -25,5 +29,18 @@ export class GroupedProductsComponent implements OnInit {
           this.selectedCategory = this.groups[0].categoryName;
         }
       });
+  }
+
+  onLikeClick(product: ProductDto) {
+    this.productsService.likeProduct(product.id).subscribe((res: ApiResponse) => {
+      if(res.isSuccessful) {
+        this.alertifyService.success(res.message);
+        product.isLiked = !product.isLiked;
+      }
+    })
+  }
+
+  changeCategoriesVisibility() {
+    this.isCategoriesVisible = !this.isCategoriesVisible;
   }
 }

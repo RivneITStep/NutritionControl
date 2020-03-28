@@ -6,9 +6,11 @@ export class ProductDto  {
   fats: number;
   carbohydrates: number;
   categoryName: string;
+  isLiked: boolean;
 }
 
 export class GroupedProducts {
   categoryName: string;
+  isCollapsed: boolean = true;
   products : Array<ProductDto>;
 }

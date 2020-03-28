@@ -3,27 +3,42 @@
     <div class="col-xl-10">
       <div class="container">
         <div class="row">
-          <div  *ngFor="let group of groups" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="card" >
-              <h5 id='{{group.categoryName}}' class="card-header">{{group.categoryName}}</h5>
-              <div class="card-body">
-                <table class="table table-striped table-responsive-md">
+          <div *ngFor="let group of groups" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card">
+
+              <div class="card-header">
+                <div class="font-16 pointer" style="float: right; color: black;"
+                  (click)="group.isCollapsed = !group.isCollapsed">
+                  <i [class]="group.isCollapsed==true ?'fas fa-angle-up':'fas fa-angle-down'"></i>
+                </div>
+                <h4 style="margin:0" id='{{group.categoryName}}'>{{group.categoryName}}</h4>
+
+              </div>
+              <div *ngIf="!group.isCollapsed" class="card-body table-responsive">
+                <table class="table table-striped">
                   <thead>
-                    <tr class="d-flex">
-                      <th class="col-4" scope="col">Name</th>
-                      <th class="col-2" scope="col">Calories</th>
-                      <th class="col-2" scope="col">Protein</th>
-                      <th class="col-2" scope="col">Fats</th>
-                      <th class="col-2" scope="col">Carbohydrates</th>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Calories</th>
+                      <th scope="col">Protein</th>
+                      <th scope="col">Fats</th>
+                      <th scope="col">Carbohydrates</th>
+                      <th scope="col">Like</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="d-flex" *ngFor="let product of group.products">
-                      <td class="col-4">{{product.name}}</td>
-                      <td class="col-2">{{product.caloriesValue}}</td>
-                      <td class="col-2">{{product.protein}}</td>
-                      <td class="col-2">{{product.fats}}</td>
-                      <td class="col-2">{{product.carbohydrates}}</td>
+                    <tr *ngFor="let product of group.products">
+                      <td>{{product.name}}</td>
+                      <td>{{product.caloriesValue}}</td>
+                      <td>{{product.protein}}</td>
+                      <td>{{product.fats}}</td>
+                      <td>{{product.carbohydrates}}</td>
+                      <td>
+                        <button class="btn btn-default" (click)="onLikeClick(product)">
+                          <i style="font-size: 20px;"
+                            [class]="product.isLiked==true ?'fas fa-heart':'far fa-heart'"></i>
+                        </button>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -34,7 +49,16 @@
       </div>
     </div>
     <div class="col-xl-2 col-lg-2 col-md-6 col-sm-12 col-12">
-     <app-sidebar-nav [categories]="categories"></app-sidebar-nav>
+      <div class="sidebar-nav-fixed">
+
+
+        <button class="btn btn-default" style="float: right; margin-top: -6px;" (click)="changeCategoriesVisibility()">
+          <i class="fas fa-times"></i>
+        </button>
+        <h3>Categories</h3>
+
+        <app-sidebar-nav *ngIf="isCategoriesVisible" [categories]="categories"></app-sidebar-nav>
+      </div>
     </div>
   </div>
 </div>

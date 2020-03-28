@@ -11,15 +11,30 @@ namespace NutritionControl.API.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProductsService _productsService;
-        public ProductsController(IProductsService productsService)
+        private readonly IAuthService _authService;
+        public ProductsController(IProductsService productsService,
+                                  IAuthService authService)
         {
 	        _productsService = productsService;
+            _authService = authService;
         }
 
         [HttpGet("GetGrouped")]
-        public async Task<CollectionResultDto<GroupedProductDto>> GetGroupedProducts()
+        public async Task<ResultDto> GetGroupedProducts()
         {
-            return await _productsService.GetGroupedProducts();
+            try
+            {
+                var userId = _authService.GetAuthorizedUserId();
+                return await _productsService.GetGroupedProducts(userId);
+            }
+            catch (System.Exception)
+            {
+                return new ResultDto
+                {
+                    IsSuccessful = false,
+                    Message = "Something goes wrong"
+                };
+            }
         }
 
         [HttpGet]
@@ -44,7 +59,6 @@ namespace NutritionControl.API.Controllers
         public async Task<ResultDto> DeleteProduct(int id)
         {
 	        return await _productsService.Delete(id);
-
         }
 
         [HttpPut]
@@ -52,5 +66,23 @@ namespace NutritionControl.API.Controllers
         {
 	        return await _productsService.Edit(model);
         }
-	}
+
+        [HttpGet("Like")]
+        public async Task<ResultDto> LikeProduct(int productId)
+        {
+            try
+            {
+                var userId = _authService.GetAuthorizedUserId();
+                return await _productsService.LikeProduct(productId, userId);
+            }
+            catch (System.Exception)
+            {
+                return new ResultDto
+                {
+                    IsSuccessful = false,
+                    Message = "Something goes wrong"
+                };
+            }
+        }
+    }
 }
