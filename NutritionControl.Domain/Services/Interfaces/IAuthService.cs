@@ -6,6 +6,7 @@ namespace NutritionControl.Domain.Services.Interfaces
 {
     public interface IAuthService
     {
+        Task<ResultDto> ChangePassword(PasswordChangeRequest request);
         Task<ResultDto> Register(RegisterDto entity);
         Task<ResultDto> Login(LoginDto entity);
 		int GetAuthorizedUserId();

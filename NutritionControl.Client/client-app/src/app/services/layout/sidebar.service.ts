@@ -23,12 +23,12 @@ export class SidebarService {
     },
     {
       routerLink: "",
-      text: "Fav. Prod",
+      text: "Favourite Products",
       icon: "fas fa-star pb-1"
     },
     {
       routerLink: "",
-      text: "Fav. Receipts",
+      text: "Favourite Receipts",
       icon: "fas fa-star pb-1"
     },
     {
@@ -40,11 +40,6 @@ export class SidebarService {
       routerLink: "diary",
       text: "Diary",
       icon: "fas fa-book pb-1"
-    },
-    {
-      routerLink: "",
-      text: "Diet",
-      icon: "fas fa-hamburger pb-1"
     }
   ]
 

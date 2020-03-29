@@ -2,6 +2,7 @@ export const API_PATH = "https://localhost:44322/api/";
 
 export const API_ROUTES = {
     register: API_PATH + "auth/register/",
+    changePassword: API_PATH + "auth/changePassword/",
     login: API_PATH + "auth/login/",
     products: API_PATH + "products/",
     account: API_PATH + "account/",

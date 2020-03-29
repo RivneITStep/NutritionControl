@@ -2,9 +2,14 @@
   <div class="card">
     <div class="card-header">
       <h2 class="text-center">BMI Calculator</h2>
+      <p class="text-muted">
+        BMI is a useful measurement for most people over 18 years old. But it is only an estimate and it doesn’t 
+        take into account age, ethnicity, gender and body composition. We recommend you also check your waist measurement and other risk factors.
+      Speak to your doctor, an Accredited Practising Dietitian or a health practitioner about your weight.      
+      This calculator shouldn’t be used for pregnant women or children.
+      </p>
     </div>
     <div class="card-body mx-2">
-
       <div class="form-group">
         <div class="text-center">
           <label class="custom-control custom-radio custom-control-inline">
@@ -17,7 +22,6 @@
           </label>
         </div>
       </div>
-
       <div class="form-group">
         <label>Height</label>
         <div class="row align-items-center">
@@ -33,10 +37,8 @@
             </div>
           </div>
         </div>
-
       </div>
-      <div class="form-group">
-
+      <div class="form-group mb-5">
         <label>Weight</label>
         <div class="row align-items-center">
           <div class="col-8">
@@ -49,13 +51,24 @@
                 <span style="width: 40px;" class="input-group-text"> kg </span>
               </div>
             </div>
-
           </div>
         </div>
-
       </div>
-      <div class="form-group">
+
+      <!-- <div class="form-group">
         <button class="btn btn-default w-100" (click)="calculate()">Calculate</button>
+      </div> -->
+      <div *ngIf="index < 18.5">
+        <h3 class="font-weight-bold">Underweight (BMI less than 18.5)</h3>
+      </div>
+      <div *ngIf="index > 18.5 && index < 24.99">
+        <h3 class="font-weight-bold">Healthy Weight (BMI 18.5 to 24.9)</h3>
+      </div>
+      <div *ngIf="index > 25 && index < 30">
+        <h3 class="font-weight-bold">Overweight (BMI 25 to 30)</h3>
+      </div>
+      <div *ngIf="index >30">
+        <h3 class="font-weight-bold">Obese (BMI 30 +)</h3>
       </div>
       <div class="form-group">
         <div class="tooltip show bs-tooltip-top index-tooltip" [ngStyle]="{left:indexratio}">
@@ -64,12 +77,95 @@
           <div class="tooltip-inner">
             {{index | number: '1.1-2'}}
           </div>
-        </div>
-        
+        </div>        
       </div>
       <div class="form-group">
         <div class="progress-index">
         </div>
+      </div>            
+      <div class="form-group mt-5">
+        <div *ngIf="index < 18.5" class="">          
+          <p>You are underweight for your height. It's important to aim to keep within your healthy weight range. 
+            Being in the healthy weight range will improve your body's ability to fight off infection or illness.</p>
+        </div>
+        <div *ngIf="index > 18.5 && index < 24.9">
+          <p>You are a healthy weight for your height. Aim to keep within the healthy weight range by enjoying a healthy, well-balanced 
+            diet and exercising regularly. Most adults should get at least 30 minutes of moderate-intensity physical activity on most, 
+            if not all, days.<br/>
+            For older people, your general health may be more important than being mildly overweight. Some researchers have suggested              
+            that a BMI range of 22-26 is acceptable for older Australians over 70 years old.</p>
+        </div>
+        <div *ngIf="index > 25 && index < 30">
+          <p>Being overweight increases your risk of developing coronary heart disease, as well as other health conditions. 
+            Keeping to a healthy weight will help you control your blood pressure and cholesterol levels. To achieve and maintain 
+            a healthy weight, be physically active every day and enjoy a healthy, well-balanced diet.</p>
+        </div>
+        <div *ngIf="index > 30">
+          <p>As your BMI increases so does your risk of developing coronary heart disease, as well as other heath conditions. 
+            It is important that you take steps to reduce your weight. The good news is that even losing small amounts of 
+            weight can benefit your health. To achieve and maintain a healthy weight be physically active every day and eat a
+             healthy, well-balanced diet that meets your energy needs.<br/>
+             For individualised medical and dietary advice consult your doctor and Accredited Practising Dietitian. If your BMI is over 35, 
+             your doctor may advise you on additional options available to support you with losing weight.</p>
+        </div>
+        <div class="form-group mt-5">
+          <h4 class="font-weight-bold">What’s BMI?</h4>
+                BMI compares your weight to your height, and is calculated by dividing your weight (in kilograms)
+                 by your height (in metres squared). It gives you an idea of whether you’re 'underweight', a 'healthy' 
+                 weight, 'overweight', or 'obese' for your height. BMI is one type of tool to help health professionals 
+                 assess the risk for chronic disease. 
+          </div>
+        <div class="mt-5">
+            <h4 class="font-weight-bold">Risks associated with being overweight</h4>
+            <div class="col-xs-12">
+                <p>Being overweight increases the risk of a number of serious diseases and health conditions. Below 
+                  is a list of said risks, according to the Centers for Disease Control and Prevention (CDC):</p>
+                  <ul>
+                    <li>High blood pressur</li>
+                    <li>Higher levels of LDL cholesterol, which is widely considered "bad cholesterol," lower levels of HDL cholesterol,
+                       considered to be good cholesterol in moderation, and high levels of triglycerides</li>
+                    <li>Type II diabetes</li>
+                    <li>Coronary heart disease</li>
+                    <li>Stroke</li>
+                    <li>Gallbladder disease</li>
+                    <li>Osteoarthritis, a type of joint disease caused by breakdown of joint cartilage</li>
+                    <li>Sleep apnea and breathing problems</li>
+                    <li>Certain cancers (endometrial, breast, colon, kidney, gallbladder, liver)</li>
+                    <li>Low quality of life</li>
+                    <li>Mental illnesses such as clinical depression, anxiety, and others</li>
+                    <li>Body pains and difficulty with certain physical functions</li>
+                    <li>Generally, an increased risk of mortality compared to those with a healthy BMI</li>
+                  </ul>
+                  <p>As can be seen from the list above, there are numerous negative, in some cases fatal, outcomes
+                     that may result from being overweight. Generally, a person should try to maintain a BMI below
+                      25 kg/m2, but ideally should consult their doctor to determine whether or not they need to make any 
+                      changes to their lifestyle in order to be healthier.</p>
+            </div>        
+          </div>
+
+          <div class="mt-5">
+            <h4 class="font-weight-bold">Risks associated with being underweight</h4>
+            <div class="col-xs-12">
+                <p>Being underweight has its own associated risks, listed below:</p>
+                  <ul>
+                    <li>Malnutrition, vitamin deficiencies, anemia (lowered ability to carry blood vessels)</li>
+                    <li>Osteoporosis, a disease that causes bone weakness, increasing the risk of breaking a bone</li>
+                    <li>A decrease in immune function</li>
+                    <li>Growth and development issues, particularly in children and teenagers</li>
+                    <li>Possible reproductive issues for women due to hormonal imbalances that can disrupt the menstrual cycle.
+                       Underweight women also have a higher chance of miscarriage in the first trimester</li>
+                    <li>Potential complications as a result of surgery</li>
+                    <li>Generally, an increased risk of mortality compared to those with a healthy BMIe</li>
+                    
+                  </ul>
+                  <p>In some cases, being underweight can be a sign of some underlying condition or disease such as anorexia
+                     nervosa, which has its own risks. Consult your doctor if you think you or someone you know is underweight, 
+                     particularly if the reason for being underweight does not seem obvious.</p>
+            </div>        
+          </div>
+
+
+
       </div>
     </div>
   </div>

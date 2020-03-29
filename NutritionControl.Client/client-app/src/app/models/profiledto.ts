@@ -9,3 +9,9 @@ export class ProfileDto {
   email: string;
   gender: string;
 }
+
+export class PasswordChangeRequest{
+  oldPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}

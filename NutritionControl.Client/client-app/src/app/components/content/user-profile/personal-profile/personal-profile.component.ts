@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ProfileDto } from 'src/app/models/profileDto';
+import { ProfileDto, PasswordChangeRequest } from 'src/app/models/profileDto';
+import { AccountService } from 'src/app/services/api/account.service';
+import { ApiResponse } from 'src/app/models/apiResponse';
+import { AlertifyService } from 'src/app/services/layout/alertify.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-personal-profile',
@@ -9,10 +13,38 @@ import { ProfileDto } from 'src/app/models/profileDto';
 export class PersonalProfileComponent implements OnInit {
 
   @Input() profile: ProfileDto;
+  @Input() cancelCallback: Function;
+  isPasswordChanged: boolean = false;
+  passwordChangeReq: PasswordChangeRequest = new PasswordChangeRequest();
+  isChanged: boolean = false;
 
-  constructor() { }
+  constructor(private accountService: AccountService, 
+              private alertifyService: AlertifyService,
+              private authService: AuthService) {  }
 
   ngOnInit() {
   }
 
+  onSave(): void {
+    this.accountService.saveProfile(this.profile).subscribe((res: ApiResponse) => {
+      if(res.isSuccessful) {
+        this.alertifyService.success(res.message);
+      }
+    });
+    if(this.isPasswordChanged){
+      this.authService.changePassword(this.passwordChangeReq).subscribe((res: ApiResponse) => {
+        if(res.isSuccessful) {
+          this.alertifyService.success(res.message);
+        }
+      });
+    }
+  }
+
+  onCancel() {
+    this.cancelCallback();
+    this.passwordChangeReq.confirmPassword = '';
+    this.passwordChangeReq.newPassword = '';
+    this.passwordChangeReq.oldPassword = '';
+    this.isChanged = false;
+  }
 }

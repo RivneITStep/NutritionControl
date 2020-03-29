@@ -14,6 +14,7 @@ import { WaterValuesComponent } from '../../content/diary/water-values/water-val
 import { CalculatorComponent } from '../../content/calculator/calculator.component';
 import { FoodIntakesComponent } from '../../content/diary/food-intakes/food-intakes.component';
 import { ReceiptsComponent } from '../../content/receipts/receipts.component';
+import { ProfileGalleryComponent } from '../../content/user-profile/profile-gallery/profile-gallery.component';
 
 const routes: Routes = [
   {
@@ -62,7 +63,8 @@ const routes: Routes = [
     WaterValuesComponent,
     FoodIntakesComponent,
     CalculatorComponent,
-    ReceiptsComponent
+    ReceiptsComponent,
+    ProfileGalleryComponent
   ],
   imports: [
     SharedModule,

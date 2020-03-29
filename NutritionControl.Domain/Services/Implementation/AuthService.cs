@@ -88,5 +88,19 @@ namespace NutritionControl.Domain.Services.Implementation
         {
             return identityErrors.Select(x => x.Code.ToString() + " " + x.Description + "\n").Aggregate((x, y) => x + y);
         }
+
+        public async Task<ResultDto> ChangePassword(PasswordChangeRequest request)
+        {
+            if (request.NewPassword != request.ConfirmPassword)
+                return new ResultDto { IsSuccessful = false, Message = "Password doesn`t match" };
+            if (request.OldPassword == request.NewPassword)
+                return new ResultDto { IsSuccessful = false, Message = "Old password matches new one" };
+            var userId = GetAuthorizedUserId();
+            var user = _userManager.Users.FirstOrDefault(x => x.Id == userId);
+            var res = await _userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
+            if (!res.Succeeded)
+                return new ResultDto { IsSuccessful = false, Message = AggregateIdentityErrors(res.Errors) };
+            return new ResultDto { IsSuccessful = true, Message = "Password was changed" };
+        }
     }
 }
