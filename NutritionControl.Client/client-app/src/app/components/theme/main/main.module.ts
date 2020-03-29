@@ -14,6 +14,7 @@ import { WaterValuesComponent } from '../../content/diary/water-values/water-val
 import { CalculatorComponent } from '../../content/calculator/calculator.component';
 import { FoodIntakesComponent } from '../../content/diary/food-intakes/food-intakes.component';
 import { ReceiptsComponent } from '../../content/receipts/receipts.component';
+import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ProfileGalleryComponent } from '../../content/user-profile/profile-gallery/profile-gallery.component';
 
 const routes: Routes = [
@@ -68,7 +69,23 @@ const routes: Routes = [
   ],
   imports: [
     SharedModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    NgCircleProgressModule.forRoot({
+      // set defaults here
+      outerStrokeWidth: 6,
+      innerStrokeWidth: 6,
+      outerStrokeColor: "#78C000",
+      innerStrokeColor: "#C7E596",
+      animationDuration: 500,
+      showTitle: true,
+      showSubtitle: true,
+      showInnerStroke: false,
+      showUnits: false,
+      titleFontSize: "12",
+      responsive: true,
+      space:0,
+      animateTitle: true
+    })
   ],
   bootstrap: [MainComponent]
 })

@@ -9,6 +9,7 @@ namespace NutritionControl.DataAccess.Entities
         public Product()
         {
             Receipts = new HashSet<ProductReceipt>();
+            ProductLikes = new HashSet<ProductLike>();
         }
 
         public int Id { get; set; }
@@ -25,5 +26,6 @@ namespace NutritionControl.DataAccess.Entities
         public Category Category { get; set; }
         public ICollection<ProductReceipt> Receipts { get; set; }
         public ICollection<FoodIntake> FoodIntakes { get; set; }
+        public ICollection<ProductLike> ProductLikes { get; set; }
     }
 }

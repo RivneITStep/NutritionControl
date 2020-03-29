@@ -10,6 +10,45 @@ export class ChartsService {
 
   constructor() { }
 
+  initCollumnChart(chart: am4charts.XYChart) {
+    // Create axes
+
+    let categoryAxis = chart.xAxes.push(new am4charts.DateAxis());
+    categoryAxis.dataFields.date = "date";
+    categoryAxis.renderer.grid.template.location = 0;
+    categoryAxis.renderer.minGridDistance = 100;
+
+    // categoryAxis.renderer.labels.template.adapter.add("dy", function (dy, target) {
+    //   if (target.dataItem && (target.dataItem.index & 2) == 2) {
+    //     return dy + 25;
+    //   }
+    //   return dy;
+    // });
+
+    let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+
+    // Create series
+    let series = chart.series.push(new am4charts.ColumnSeries());
+    series.dataFields.valueY = "value";
+    series.dataFields.dateX = "date";
+    series.name = "Value";
+    series.columns.template.tooltipText = "{dateX}: [bold]{da}[/]";
+    series.columns.template.fillOpacity = .8;
+
+    let columnTemplate = series.columns.template;
+    columnTemplate.strokeWidth = 2;
+    columnTemplate.strokeOpacity = 1;
+
+    chart.scrollbarY = new am4core.Scrollbar();
+    chart.scrollbarY.parent = chart.leftAxesContainer;
+    chart.scrollbarY.minHeight = 100;
+    chart.scrollbarY.toBack();
+
+    chart.scrollbarX = new am4core.Scrollbar();
+    chart.scrollbarX.parent = chart.bottomAxesContainer;
+    chart.scrollbarX.toBack();
+  }
+
   initChart(chart: am4charts.XYChart) {
     let dateAxis = chart.xAxes.push(new am4charts.DateAxis());
     let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
