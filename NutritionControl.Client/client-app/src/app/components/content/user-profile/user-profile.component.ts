@@ -14,21 +14,23 @@ import { ApiSingleResponse } from 'src/app/models/apiResponse';
 export class UserProfileComponent implements OnInit {
 
   profile: ProfileDto = new ProfileDto();
+  public cancelCallback: Function;
 
   constructor(config: NgbTabsetConfig,
-              private authService: AuthService,
-              private accountService: AccountService) {
+    private authService: AuthService,
+    private accountService: AccountService) {
     config.justify = 'fill';
-   }
+  }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.getInfo();
+    this.cancelCallback = this.getInfo.bind(this);
+  }
+
+  getInfo() {
     const userId = this.authService.getCredentials().userId;
     this.accountService.getProfile(userId).subscribe((res: ApiSingleResponse) => {
       this.profile = res.data;
-    })
-  }
-
-  onSave(): void {
-    console.log(this.profile);
+    });
   }
 }

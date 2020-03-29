@@ -25,6 +25,7 @@
     "@ng-bootstrap/ng-bootstrap": "^5.2.1",
     "alertifyjs": "^1.13.1",
     "bootstrap": "^4.4.1",
+    "ng-circle-progress": "^1.5.1",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

@@ -1,27 +1,121 @@
 <div class="card">
+
   <h3 class="card-header">
     Food Intakes
   </h3>
+
   <div class="card-body">
-    <div class="row">
-      <div class="col-xl-8 col-12">
-        <ngb-accordion #acc="ngbAccordion">
-          <ngb-panel id="toggle-1" title="Add new food intake">
-            <ng-template ngbPanelContent>
-             <div>
+    <div class="col-12">
+      <div class="d-flex justify-content-center mb-3">
+        <circle-progress [percent]="(calories / dailyCalories) *100" 
+          [title]="[calories+'/',dailyCalories]" 
+          subtitle="ccal"
+          [radius]="40" 
+          [outerStrokeColor]="calories<dailyCalories?'#2ec551':'#ef172c'" >
+        </circle-progress>
+        <circle-progress [percent]="(fats / dailyFats)*100" 
+          [title]="[fats+'/',dailyFats]" 
+          [radius]="40"
+          subtitle="fats" 
+          [outerStrokeColor]="fats<dailyFats?'#2ec551':'#ef172c'">
+        </circle-progress>
+        <circle-progress [percent]="(carbohydrates/dailyCarbohydrates) * 100" 
+          [title]="[carbohydrates+'/',dailyCarbohydrates]" 
+          [radius]="40"
+          [outerStrokeColor]="carbohydrates<dailyCarbohydrates?'#2ec551':'#ef172c'" 
+          subtitle="carb">
+        </circle-progress>
+        <circle-progress [percent]="(proteins/dailyProteins) * 100" 
+          [title]="[proteins+'/',dailyProteins]" 
+          [radius]="40" 
+          [outerStrokeColor]="proteins<dailyProteins?'#2ec551':'#ef172c'"
+          subtitle="prot">
+        </circle-progress>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-12">
+          <div>
+            <div style="height: 234px; overflow-y: overlay;">
+              <ul class="list-group">
+                <li *ngIf="shownfoodIntakes == null || shownfoodIntakes.length == 0" class="list-group-item list-group-item-action flex-column align-items-start">
+                  There are no meals of this type
+                </li>
+                <li class="list-group-item list-group-item-action flex-column align-items-start"
+                  *ngFor="let intake of shownfoodIntakes">
+                  <div class="d-flex">
+                    <div class="w-50 font-bold">
+                      {{intake.product.name}}
+                    </div>
+                    <div class="w-25">
+                      {{intake.foodWeight}} gr
+                    </div>
+                    <div class="w-25">
+                      {{intake.dateOfIntake | date:'shortTime'}}
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center">
+                    <div class="w-25 product-value">
+                      PR: {{intake.product.protein}}
+                    </div>
+                    <div class="w-25 product-value">
+                      CR: {{intake.product.carbohydrates}}
+                    </div>
+                    <div class="w-25 product-value">
+                      FT: {{intake.product.fats}}
+                    </div>
+                    <div class="w-25 product-value text-success font-weight-bold">
+                      CL: {{intake.product.caloriesValue}}
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="btn-group btn-group-toggle w-100" ngbRadioGroup (ngModelChange)="changeType($event)" [(ngModel)]="currentType">
+              <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                <input ngbButton type="radio" value="Breakfast">Breakfast
+              </label>
+              <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                <input ngbButton type="radio" value="Lunch">Lunch
+              </label>
+              <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                <input ngbButton type="radio" value="Snack">Snack
+              </label>
+              <label ngbButtonLabel class="btn-outline-primary btn-sm">
+                <input ngbButton type="radio" value="Dinner">Dinner
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-12">
+          <div class="text-center">
+            <ngb-datepicker (dateSelect)="onDateSelect()" #dp [(ngModel)]="selectedDate"
+              (navigate)="date = $event.next"></ngb-datepicker>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-8">
               <div class="form-group">
                 <label for="typeahead-basic">Search for a product:</label>
                 <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="selectedProduct"
                   [inputFormatter]="formatter" [ngbTypeahead]="searchProduct" [resultTemplate]="rt" />
               </div>
+            </div>
+            <div class="col-4">
+              <div class="form-group">
+                <label for="typeahead-basic">Enter gramms:</label>
+                <input type="number" class="form-control" [(ngModel)]="foodWeight" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-8">
               <div class="form-group">
                 <label class="custom-control custom-radio">
                   <input value="Breakfast" [(ngModel)]="intakeType" type="radio" name="radio-inline"
                     class="custom-control-input"><span class="custom-control-label">Breakfast</span>
-                </label>
-                <label class="custom-control custom-radio">
-                  <input value="Second Breakfast" [(ngModel)]="intakeType" type="radio" name="radio-inline"
-                    class="custom-control-input"><span class="custom-control-label">Second Breakfast</span>
                 </label>
                 <label class="custom-control custom-radio">
                   <input value="Lunch" [(ngModel)]="intakeType" type="radio" name="radio-inline"
@@ -29,31 +123,27 @@
                 </label>
                 <label class="custom-control custom-radio">
                   <input value="Dinner" [(ngModel)]="intakeType" type="radio" name="radio-inline" checked=""
+                    class="custom-control-input"><span class="custom-control-label">Snack</span>
+                </label>
+                <label class="custom-control custom-radio">
+                  <input value="Dinner" [(ngModel)]="intakeType" type="radio" name="radio-inline" checked=""
                     class="custom-control-input"><span class="custom-control-label">Dinner</span>
                 </label>
               </div>
+            </div>
+            <div class="col-4">
               <div class="form-group">
                 <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
               </div>
-             </div>
-            </ng-template>
-          </ngb-panel>
-          <ngb-panel id="toggle-2" title="Food intakes">
-            <ng-template ngbPanelContent>
-              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia
-              aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor,
-              sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica,
-              craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
-              occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus
-              labore sustainable VHS.
-            </ng-template>
-          </ngb-panel>
-        </ngb-accordion>
-      </div>
-      <div class="col-xl-4 col-12">
-        <ngb-datepicker #dp [(ngModel)]="selectedDate" (navigate)="date = $event.next"></ngb-datepicker>
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn btn-success w-100" (click)="onAdd()">Add food intake</button>
+          </div>
+        </div>
       </div>
     </div>
+
   </div>
 </div>
 

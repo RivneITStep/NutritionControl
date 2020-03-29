@@ -10,7 +10,7 @@ namespace NutritionControl.API.Controllers
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class AuthController : ControllerBase
-    { 
+    {
         private readonly IAuthService _authService;
 
         public AuthController(IAuthService authService)
@@ -43,5 +43,18 @@ namespace NutritionControl.API.Controllers
                 throw ex;
             }
         }
-    }
+
+        [HttpPost]
+        public async Task<ResultDto> ChangePassword(PasswordChangeRequest request)
+        {
+            try
+            {
+                return await _authService.ChangePassword(request);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+    } 
 }

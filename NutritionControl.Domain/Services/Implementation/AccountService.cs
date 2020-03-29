@@ -51,5 +51,39 @@ namespace NutritionControl.Domain.Services.Implementation
             }
 
         }
+
+        public async Task<ResultDto> SaveProfile(ProfileDto profile, int userId)
+        {
+            var _profile = await _repository.GetSingle(x => x.UserId == userId);
+            if (_profile == null)
+            {
+                await _repository.Create(new UserAdditionalInfo
+                {
+                    UserId = userId,
+                    Age = profile.Age,
+                    BMI = profile.BMI,
+                    Gender = profile.Gender,
+                    GoalWeight = profile.GoalWeight,
+                    Height = profile.Height,
+                    Name = profile.Name,
+                    Surname = profile.Surname,
+                    Weight = profile.Weight
+                });
+                return new ResultDto { IsSuccessful = true, Message = "Successfully added" };
+            }
+
+            _profile.Name = profile.Name;
+            _profile.Age = profile.Age;
+            _profile.BMI = profile.BMI;
+            _profile.Gender = profile.Gender;
+            _profile.GoalWeight = profile.GoalWeight;
+            _profile.Height = profile.Height;
+            _profile.Name = profile.Name;
+            _profile.Surname = profile.Surname;
+            _profile.Weight = profile.Weight;
+
+            await _repository.Update(_profile);
+            return new ResultDto { IsSuccessful = true, Message = "Successfully changed" };
+        }
     }
 }

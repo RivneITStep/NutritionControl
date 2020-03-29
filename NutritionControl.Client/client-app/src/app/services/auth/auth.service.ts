@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 import { ApiResponse, ApiSingleResponse } from 'src/app/models/apiResponse';
 import { UserCredentials } from 'src/app/helpers/userCreds';
 import { Router } from '@angular/router';
+import { PasswordChangeRequest } from 'src/app/models/profileDto';
 
 @Injectable({
   providedIn: 'root'
@@ -55,4 +56,8 @@ export class AuthService {
     this.tokenService.removeToken();
     this.router.navigateByUrl("");
   } 
+
+  changePassword(request: PasswordChangeRequest) : Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(API_ROUTES.changePassword, request);
+  }
 }

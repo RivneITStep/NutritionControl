@@ -20,9 +20,45 @@ namespace NutritionControl.API.Controllers
 			_authService = authService;
 		}
 
-		#region WeightInfo
+        [HttpPost("GetFoodIntakes")]
+        public async Task<ResultDto> GetFoodIntakes(FoodIntakeRequest request)
+        {
+            try
+            {
+                var userId = _authService.GetAuthorizedUserId();
+                return await _diaryService.GetFoodIntakes(request, userId);
+            }
+            catch (Exception ex)
+            {
+                return new ResultDto
+                {
+                    IsSuccessful = false,
+                    Message = ex.Message
+                };
+            }
+        }
 
-		[HttpGet("GetWeightInfos")]
+        [HttpPost("AddFoodIntake")]
+        public async Task<ResultDto> AddFoodIntake(FoodIntakeDto foodIntake)
+        {
+            try
+            {
+                var userId = _authService.GetAuthorizedUserId();
+                return await _diaryService.AddFoodIntake(foodIntake, userId);
+            }
+            catch (Exception ex)
+            {
+                return new ResultDto
+                {
+                    IsSuccessful = false,
+                    Message = ex.Message
+                };
+            }
+        }
+
+        #region WeightInfo
+
+        [HttpGet("GetWeightInfos")]
 		public async Task<ResultDto> GetWeightInfos(int userId)
 		{
 			try

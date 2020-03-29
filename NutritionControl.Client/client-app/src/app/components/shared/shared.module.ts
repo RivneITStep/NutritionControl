@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { SideBarComponent } from '../theme/layout/side-bar/side-bar.component';
-
+import { NgCircleProgressModule } from 'ng-circle-progress'
 
 
 @NgModule({

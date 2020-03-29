@@ -22,20 +22,20 @@
             <a class="nav-link pointer" [routerLink]="['/auth/register']" routerLinkActive="router-link-active">
               Register
             </a>
-          </li>
-          <li *ngIf="isLoggedIn()" class="nav-item">
-            <a class="nav-link pointer" (click)='onLogout()'>
-              Logout
-            </a>
-          </li>
+          </li>          
           <li *ngIf="isLoggedIn()" class="nav-item dropdown nav-user pointer">
             <div ngbDropdown placement="bottom-right">
-              <a class="nav-link nav-user-img" id="dropdownBasic1" ngbDropdownToggle><img src="assets/user.jpg" alt=""
+              <a class="nav-link nav-user-img" id="dropdownBasic1" ngbDropdownToggle><img src="assets/img/usr.jpg" alt=""
                   class="user-avatar-md rounded-circle"></a>
               <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="nav-user-info dropdown-menu-right ">
                 <app-user-navbar></app-user-navbar>
               </div>
             </div>
+          </li>
+          <li *ngIf="isLoggedIn()" class="nav-item">            
+            <a class="nav-link pointer" (click)='onLogout()'>
+              <i class="fas fa-sign-out-alt"></i>
+            </a>
           </li>
         </ul>
       </div>
