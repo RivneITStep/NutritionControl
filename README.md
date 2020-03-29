@@ -21,4 +21,4 @@ Wondering how much of protein, fats and carbohydrates you should eat? You can be
 
 ### Authors
 [Solomiia Prymich](https://github.com/Solomiya98)
-[Dariia Gryb](https://github.com/dashaag
+[Dariia Gryb](https://github.com/dashaag)

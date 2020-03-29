@@ -50,6 +50,8 @@ export class AuthService {
 
   isAdmin(): boolean {
     const token = this.tokenService.getTokenPayload();
+    if(token==null)
+      return false;
     return token['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']=="admin";
   }
 
