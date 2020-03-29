@@ -1,6 +1,6 @@
 <div class="image-section">
   <img class="main-img"
-    src="http://www.weightloss.com.au/assets/Uploads/Recipes/spanish-fish-stew-lge.jpg">
+    src="{{receipt.photoUrl}}">
   <div class="img-overlay margins">
     <h2>{{receipt.name}}</h2>
     <p>{{receipt.description}}</p>
@@ -33,7 +33,7 @@
 <div class="ingredients margins">
   <h1>Ingredients</h1>
   <ul>
-    <li *ngFor="let product of receipt.products">{{product.count}} {{product.measurment}}
+    <li *ngFor="let product of receipt.products">{{product.count*100}} {{product.measurment}}
       {{product.product.name.toLowerCase()}}</li>
   </ul>
 </div>
