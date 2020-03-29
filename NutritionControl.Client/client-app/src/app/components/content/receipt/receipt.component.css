@@ -1,0 +1,70 @@
+.image-section{
+  text-align:center;
+  position: relative;
+}
+
+.main-img{
+  width:90%;
+}
+
+.img-overlay {
+  padding: 15px;
+  text-align: left;
+  font-size: 19px;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  bottom:0;
+}
+
+.img-overlay h2{
+  color:rgb(238, 104, 51);
+}
+
+.img-overlay p{
+  color:rgb(221, 221, 231);  
+}
+
+.nutrition-blocks{
+  text-align: center;
+}
+
+.nutrition-item-title{
+  background-color: rgb(71, 76, 138);
+  color: white;
+  border-radius: 5px;
+  font-size:20px;
+  padding: 10px;
+  
+}
+
+.nutrition-item-value{
+  background-color: rgb(147, 148, 202);
+  color:white;
+  border-radius: 5px;
+  font-size:17px;
+  padding: 1px;
+  margin: 2px;
+}
+
+.line{
+  height:5px;
+  width:90%;
+  background-color:rgb(147, 148, 202);
+  
+}
+
+.margins{
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+h1{
+  font-size: 32px;
+}
+
+.ingredients ul{
+  font-size:20px;
+}
+.method p{
+  font-size:20px;
+}

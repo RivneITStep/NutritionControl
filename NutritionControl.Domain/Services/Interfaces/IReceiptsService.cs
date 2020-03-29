@@ -10,5 +10,6 @@ namespace NutritionControl.Domain.Services.Interfaces
         Task<ResultDto> Add(ReceiptDto model);
         Task<ResultDto> Delete(int id);
         Task<ResultDto> Edit(ReceiptDto model);
+        Task<ResultDto> GetReceipt(int id);
     }
 }
