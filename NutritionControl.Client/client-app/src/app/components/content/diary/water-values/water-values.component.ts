@@ -55,7 +55,7 @@ export class WaterValuesComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit(): void {
     this.zone.runOutsideAngular(() => {
       this.chart = am4core.create("waterchart", am4charts.XYChart);
-      this.chartsService.initChart(this.chart);
+      this.chartsService.initCollumnChart(this.chart);
     });
   }
 
