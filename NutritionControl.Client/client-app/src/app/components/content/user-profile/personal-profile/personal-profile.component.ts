@@ -26,6 +26,20 @@ export class PersonalProfileComponent implements OnInit {
   }
 
   onSave(): void {
+
+    if(this.profile.name == null || this.profile.name == '' ||
+    this.profile.surname == null || this.profile.surname == '' ||
+    this.profile.weight == null || this.profile.weight <= 0 ||
+    this.profile.height == null || this.profile.height <= 0||
+    this.profile.gender == null || this.profile.gender == '' ||
+    this.profile.age == null || this.profile.age <=0 )
+    {
+      this.alertifyService.error("You must fill all fields");
+      return;
+    }
+
+    return;
+
     this.accountService.saveProfile(this.profile).subscribe((res: ApiResponse) => {
       if(res.isSuccessful) {
         this.alertifyService.success(res.message);

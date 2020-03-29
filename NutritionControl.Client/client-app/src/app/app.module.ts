@@ -12,6 +12,7 @@ import { ErrorHandlingInterceptor } from './helpers/interceptors/errorHandling.i
 import { CalculatorComponent } from './components/content/calculator/calculator.component';
 import { FoodIntakesComponent } from './components/content/diary/food-intakes/food-intakes.component';
 import { ReceiptsComponent } from './components/content/receipts/receipts.component';
+import { AdminGuard } from './guards/admin.guard';
 
 const routes: Routes = [
   {
@@ -29,7 +30,8 @@ const routes: Routes = [
   },
   {
     path: APP_ROUTES.admin,
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule)
+    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AdminGuard]
   },
   {
     path: '**',

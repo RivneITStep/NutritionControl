@@ -8,7 +8,7 @@
       </button>
       <div class="collapse navbar-collapse " id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto navbar-right-top">
-          <li class="nav-item">
+          <li *ngIf="isAdmin()" class="nav-item">
             <a class="nav-link pointer" [routerLink]="['/admin-panel']" routerLinkActive="router-link-active">
               Adminka
             </a>

@@ -30,7 +30,12 @@ export class UserProfileComponent implements OnInit {
   getInfo() {
     const userId = this.authService.getCredentials().userId;
     this.accountService.getProfile(userId).subscribe((res: ApiSingleResponse) => {
-      this.profile = res.data;
+      if(res.message!="User Dont Have Profile"){
+        this.profile = res.data;
+      }
+      else {
+        this.profile = new ProfileDto();
+      }
     });
   }
 }

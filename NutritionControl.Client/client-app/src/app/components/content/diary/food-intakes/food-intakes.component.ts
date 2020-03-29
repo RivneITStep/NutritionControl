@@ -27,6 +27,7 @@ export class FoodIntakesComponent implements OnInit {
 
   /* Add Food Intake */
 
+  addCollapsed: boolean = false;
   products: Array<ProductDto>;
   selectedProduct: ProductDto;
   foodWeight: number;

@@ -45,7 +45,7 @@ namespace NutritionControl.Domain.Services.Implementation
                 FoodWeight = x.FoodWeight,
                 ProductId = x.ProductId,
                 Type = x.Type
-            }, x => x.DateOfIntake.ToShortDateString() == request.Date.ToShortDateString(), x => x.Product);
+            }, x => x.DateOfIntake.ToShortDateString() == request.Date.ToShortDateString() && x.UserId == userId, x => x.Product);
 
             var res = intakes.ToList();
 
@@ -81,16 +81,30 @@ namespace NutritionControl.Domain.Services.Implementation
         {
             try
             {
-                await _weightRepository.Create(new WeightInfo
+                var _weightInfo = await _weightRepository.GetSingle(x => x.UserId == userId && x.DateOfMeasurement.ToShortDateString() == weightInfo.DateOfMeasurement.ToShortDateString());
+
+                if(_weightInfo == null)
                 {
-                    DateOfMeasurement = weightInfo.DateOfMeasurement,
-                    UserId = userId,
-                    WeightValue = weightInfo.WeightValue
-                });
+                    await _weightRepository.Create(new WeightInfo
+                    {
+                        DateOfMeasurement = weightInfo.DateOfMeasurement,
+                        UserId = userId,
+                        WeightValue = weightInfo.WeightValue
+                    });
+                    return new ResultDto
+                    {
+                        IsSuccessful = true,
+                        Message = "Weight info was added"
+                    };
+                }
+
+                _weightInfo.WeightValue = weightInfo.WeightValue;
+                await _weightRepository.Update(_weightInfo);
+
                 return new ResultDto
                 {
                     IsSuccessful = true,
-                    Message = "Weight info was added"
+                    Message = "Weight info was changed"
                 };
             }
             catch (Exception ex)

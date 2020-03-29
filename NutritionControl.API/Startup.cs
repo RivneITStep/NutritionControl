@@ -54,6 +54,7 @@ namespace NutritionControl.API
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<IDiaryService, DiaryService>();
             services.AddScoped<IReceiptsService, ReceiptsService>();
+            services.AddScoped<ICategoriesService, CategoriesService>();
 
             services.AddIdentity<User, IdentityRole<int>>(opts =>
             {

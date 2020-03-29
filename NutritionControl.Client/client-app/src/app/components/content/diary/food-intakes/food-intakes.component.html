@@ -32,7 +32,7 @@
           subtitle="prot">
         </circle-progress>
       </div>
-      <div class="row">
+      <div class="row mb-4">
         <div class="col-xl-6 col-12">
           <div>
             <div style="height: 234px; overflow-y: overlay;">
@@ -55,16 +55,16 @@
                   </div>
                   <div class="d-flex align-items-center">
                     <div class="w-25 product-value">
-                      PR: {{intake.product.protein}}
+                      PR: {{intake.product.protein * (intake.foodWeight/100) | number: '1.1-2'}}
                     </div>
                     <div class="w-25 product-value">
-                      CR: {{intake.product.carbohydrates}}
+                      CR: {{intake.product.carbohydrates * (intake.foodWeight/100) | number: '1.1-2'}}
                     </div>
                     <div class="w-25 product-value">
-                      FT: {{intake.product.fats}}
+                      FT: {{intake.product.fats * (intake.foodWeight/100) | number: '1.1-2'}}
                     </div>
                     <div class="w-25 product-value text-success font-weight-bold">
-                      CL: {{intake.product.caloriesValue}}
+                      CL: {{intake.product.caloriesValue * (intake.foodWeight/100) | number: '1.1-2'}}
                     </div>
                   </div>
                 </li>
@@ -93,57 +93,68 @@
           </div>
         </div>
       </div>
-      <div class="row mt-4">
-        <div class="col-12">
-          <div class="row">
-            <div class="col-8">
-              <div class="form-group">
-                <label for="typeahead-basic">Search for a product:</label>
-                <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="selectedProduct"
-                  [inputFormatter]="formatter" [ngbTypeahead]="searchProduct" [resultTemplate]="rt" />
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="form-group">
-                <label for="typeahead-basic">Enter gramms:</label>
-                <input type="number" class="form-control" [(ngModel)]="foodWeight" />
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-8">
-              <div class="form-group">
-                <label class="custom-control custom-radio">
-                  <input value="Breakfast" [(ngModel)]="intakeType" type="radio" name="radio-inline"
-                    class="custom-control-input"><span class="custom-control-label">Breakfast</span>
-                </label>
-                <label class="custom-control custom-radio">
-                  <input value="Lunch" [(ngModel)]="intakeType" type="radio" name="radio-inline"
-                    class="custom-control-input"><span class="custom-control-label">Lunch</span>
-                </label>
-                <label class="custom-control custom-radio">
-                  <input value="Dinner" [(ngModel)]="intakeType" type="radio" name="radio-inline" checked=""
-                    class="custom-control-input"><span class="custom-control-label">Snack</span>
-                </label>
-                <label class="custom-control custom-radio">
-                  <input value="Dinner" [(ngModel)]="intakeType" type="radio" name="radio-inline" checked=""
-                    class="custom-control-input"><span class="custom-control-label">Dinner</span>
-                </label>
-              </div>
-            </div>
-            <div class="col-4">
-              <div class="form-group">
-                <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
-              </div>
+
+      
+
+  </div>
+
+  <div class="card-footer">
+    <div class="row">
+      <div class="btn btn-default w-100" (click)="addCollapsed=!addCollapsed" >
+        Add new intake 
+        <i style="margin-left: 10px;" [class]="addCollapsed==true ?'fas fa-angle-up':'fas fa-angle-down'"></i>
+      </div>
+    </div>
+    <div *ngIf="addCollapsed" class="row">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-8">
+            <div class="form-group">
+              <label for="typeahead-basic">Search for a product:</label>
+              <input id="typeahead-basic" type="text" class="form-control" [(ngModel)]="selectedProduct"
+                [inputFormatter]="formatter" [ngbTypeahead]="searchProduct" [resultTemplate]="rt" />
             </div>
           </div>
-          <div class="row">
-            <button class="btn btn-success w-100" (click)="onAdd()">Add food intake</button>
+          <div class="col-4">
+            <div class="form-group">
+              <label for="typeahead-basic">Enter gramms:</label>
+              <input type="number" class="form-control" [(ngModel)]="foodWeight" />
+            </div>
           </div>
+        </div>
+        <div class="row">
+          <div class="col-8">
+            <div class="form-group">
+              <label class="custom-control custom-radio">
+                <input value="Breakfast" [(ngModel)]="intakeType" type="radio" name="radio-inline"
+                  class="custom-control-input"><span class="custom-control-label">Breakfast</span>
+              </label>
+              <label class="custom-control custom-radio">
+                <input value="Lunch" [(ngModel)]="intakeType" type="radio" name="radio-inline"
+                  class="custom-control-input"><span class="custom-control-label">Lunch</span>
+              </label>
+              <label class="custom-control custom-radio">
+                <input value="Snack" [(ngModel)]="intakeType" type="radio" name="radio-inline" checked=""
+                  class="custom-control-input"><span class="custom-control-label">Snack</span>
+              </label>
+              <label class="custom-control custom-radio">
+                <input value="Dinner" [(ngModel)]="intakeType" type="radio" name="radio-inline" checked=""
+                  class="custom-control-input"><span class="custom-control-label">Dinner</span>
+              </label>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="form-group">
+              <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn btn-success w-100" (click)="onAdd()">Add food intake</button>
         </div>
       </div>
     </div>
-
+  </div>
   </div>
 </div>
 

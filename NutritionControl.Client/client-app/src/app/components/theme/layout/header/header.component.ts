@@ -20,6 +20,10 @@ export class HeaderComponent implements OnInit {
     return this.authService.isLoggedIn();
   }
 
+  isAdmin(): boolean {
+    return this.authService.isAdmin();
+  }
+
   onLogout(): void {
     this.authService.logout();
   }

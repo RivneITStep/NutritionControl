@@ -40,7 +40,8 @@ namespace NutritionControl.Domain.Services.Implementation
             if (result.Succeeded)
             {
                 var user = _userManager.Users.FirstOrDefault(r => r.Email == model.Email);
-                var token = _jwtService.GenerateJwtToken(model.Email, user.Id);
+                var roles = await _userManager.GetRolesAsync(user);
+                var token = _jwtService.GenerateJwtToken(model.Email, user.Id, roles);
                 var refreshToken = await _jwtService.GenerateRefreshToken(user.Id);
 
                 return new SingleResultDto<LoginResult>

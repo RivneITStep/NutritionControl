@@ -3,7 +3,16 @@
     <div class="col-xl-10">
       <div class="container">
         <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div *ngIf="groups == null || groups.length==0" class="card">
+              <div class="card-body">
+                There are no products yet
+              </div>
+            </div>
+          </div>
+
           <div *ngFor="let group of groups" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+
             <div class="card">
 
               <div class="card-header">

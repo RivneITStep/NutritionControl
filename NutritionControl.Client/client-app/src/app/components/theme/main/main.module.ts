@@ -16,6 +16,7 @@ import { FoodIntakesComponent } from '../../content/diary/food-intakes/food-inta
 import { ReceiptsComponent } from '../../content/receipts/receipts.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ProfileGalleryComponent } from '../../content/user-profile/profile-gallery/profile-gallery.component';
+import { DiaryGuard } from 'src/app/guards/diary.guard';
 
 const routes: Routes = [
   {
@@ -37,7 +38,8 @@ const routes: Routes = [
       },
       {
         path: 'diary',
-        component: DiaryComponent
+        component: DiaryComponent,
+        canActivate: [DiaryGuard]
       },
       {
         path: 'calculator',
@@ -46,7 +48,11 @@ const routes: Routes = [
       {
         path: 'receipts',
         component: ReceiptsComponent
-      }
+      },
+      {
+        path: 'products/favourite',
+        component: GroupedProductsComponent,
+      },
     ]
   }
 ]

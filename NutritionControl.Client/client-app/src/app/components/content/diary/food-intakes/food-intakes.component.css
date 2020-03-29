@@ -5,3 +5,7 @@
 .product-value {
   text-align: center;
 }
+
+.list-group-item {
+  border: 1px solid #e6e6f2;
+}

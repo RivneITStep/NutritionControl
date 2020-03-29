@@ -48,6 +48,11 @@ export class AuthService {
     return creds;
   }
 
+  isAdmin(): boolean {
+    const token = this.tokenService.getTokenPayload();
+    return token['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']=="admin";
+  }
+
   isLoggedIn(): boolean {
     return this.tokenService.isTokenValid();
   }

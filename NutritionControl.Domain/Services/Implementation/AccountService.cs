@@ -47,7 +47,7 @@ namespace NutritionControl.Domain.Services.Implementation
             }
             else
             {
-                return new ResultDto { IsSuccessful = false, Message = "User Dont Have Profile" };
+                return new ResultDto { IsSuccessful = true, Message = "User Dont Have Profile" };
             }
 
         }

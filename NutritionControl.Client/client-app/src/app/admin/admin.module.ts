@@ -4,6 +4,7 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../components/shared/shared.module';
 import { ProductsCrudComponent } from './components/products-crud/products-crud.component';
+import { CategoriesCrudComponent } from './components/categories-crud/categories-crud.component';
 
 const routes: Routes = [
   {
@@ -18,13 +19,17 @@ const routes: Routes = [
       {
         path: 'products',
         component: ProductsCrudComponent
+      },
+      {
+        path: 'categories',
+        component: CategoriesCrudComponent
       }
     ]
   }
 ]
 
 @NgModule({
-  declarations: [AdminPanelComponent, ProductsCrudComponent],
+  declarations: [AdminPanelComponent, ProductsCrudComponent, CategoriesCrudComponent],
   imports: [
     SharedModule,
     RouterModule.forChild(routes)

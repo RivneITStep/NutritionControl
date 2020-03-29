@@ -5,6 +5,7 @@ export const API_ROUTES = {
     changePassword: API_PATH + "auth/changePassword/",
     login: API_PATH + "auth/login/",
     products: API_PATH + "products/",
+    categories: API_PATH + "categories/",
     account: API_PATH + "account/",
     diary: API_PATH + "diary/",
     receipts: API_PATH + "receipts/"

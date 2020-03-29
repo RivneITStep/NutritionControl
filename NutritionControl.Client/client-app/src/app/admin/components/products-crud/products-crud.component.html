@@ -31,8 +31,10 @@
                     [(ngModel)]="newProduct.name">
                 </td>
                 <td>
-                  <input class="form-control" type="text"
-                    [(ngModel)]="newProduct.categoryName">
+                  <input type="text" class="form-control" [(ngModel)]="selectedCategory"
+                  [inputFormatter]="formatter" [ngbTypeahead]="searchProduct" [resultTemplate]="rt" />
+                  <!-- <input class="form-control" type="text"
+                    [(ngModel)]="newProduct.categoryName"> -->
                 </td>
                 <td>
                   <input class="form-control" type="number"
@@ -116,3 +118,9 @@
     </div>
   </div>
 </div>
+
+<ng-template #rt let-r="result" let-t="term">
+  <div class="products-result">
+    <ngb-highlight [result]="r.name" [term]="t"></ngb-highlight>
+  </div>
+</ng-template>

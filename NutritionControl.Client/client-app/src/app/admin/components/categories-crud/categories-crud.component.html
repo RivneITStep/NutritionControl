@@ -1,0 +1,82 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="row align-items-center">
+            <div class="col-xl-9 col-lg-8 col-md-6 col-12">
+              <h2 class="my-md-auto my-2 mx-auto text-center">Categories</h2>
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-6 col-12">
+              <div class="input-group">
+                <span class="input-group-prepend">
+                  <span class="input-group-text">Page Size:</span>
+                </span>
+                <select (change)="onPageSizeChange()" [(ngModel)]="pageSize" class="form-control">
+                  <option>10</option>
+                  <option>20</option>
+                  <option>50</option>
+                  <option>100</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <td>
+                  <input class="form-control" type="text"
+                    [(ngModel)]="newCategory.name">
+                </td>
+                <td>
+                  <input disabled class="form-control" type="text"
+                    [(ngModel)]="newCategory.productsCount">
+                </td>
+                <td colspan="2">
+                  <button class="btn btn-sm btn-success w-100" (click)="onAdd()">
+                    Add
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">ProductsCount</th>
+                <th scope="col">Delete</th>
+                <th scope="col">Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let category of categories">
+                <td>
+                  <input [disabled]="!checkEdit(category.id)" class="form-control" type="text"
+                    [(ngModel)]="category.name">
+                </td>
+                <td>
+                  <input disabled class="form-control" type="text"
+                    [(ngModel)]="category.productsCount">
+                </td>
+                <td>
+                  <button [disabled]='editMode && selectedId!=category.id' class="btn btn-sm w-100" (click)="onDelete(category.id)">
+                    <i [class]="editMode==true && selectedId == category.id ?'fas fa-times':'fas fa-trash-alt'"></i>
+                  </button>
+                </td>
+                <td>
+                  <button [disabled]='editMode && selectedId!=category.id' class="btn btn-sm w-100" (click)="onEdit(category)">
+                    <i [class]="editMode==true && selectedId == category.id?'fas fa-check':'fas fa-edit'"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer">
+          <ngb-pagination class="d-flex justify-content-center" (pageChange)="onPageChange($event)" [rotate]="true"
+            [ellipses]="false" [pageSize]="pageSize" [maxSize]="5" [collectionSize]="count" [(page)]="page"
+            [boundaryLinks]="false" aria-label="Default pagination"></ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

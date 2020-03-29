@@ -6,6 +6,7 @@ import { ChartsService } from 'src/app/services/layout/charts.service';
 import { DiaryService } from 'src/app/services/api/diary.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { ApiCollectionResponse, ApiResponse } from 'src/app/models/apiResponse';
+import { AlertifyService } from 'src/app/services/layout/alertify.service';
 
 @Component({
   selector: 'app-weight-infos',
@@ -21,7 +22,8 @@ export class WeightInfosComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private zone: NgZone,
     private chartsService: ChartsService,
     private diaryService: DiaryService,
-    private authService: AuthService) { }
+    private authService: AuthService,
+    private alertifyService: AlertifyService) { }
 
   ngOnInit() {
     this.getWeightInfos();
@@ -46,6 +48,7 @@ export class WeightInfosComponent implements OnInit, OnDestroy, AfterViewInit {
     this.weightInfo.dateOfMeasurement = new Date();
     this.diaryService.addWeightInfo(this.weightInfo).subscribe((res: ApiResponse) => {
       if(res.isSuccessful) {
+        this.alertifyService.success(res.message);
         this.getWeightInfos();
       }
     })

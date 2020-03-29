@@ -13,6 +13,6 @@ export class AdminPanelComponent implements OnInit {
   constructor(private sidebarService: SidebarService) { }
 
   ngOnInit() {
-    this.links = this.sidebarService.getSidebarLinks();
+    this.links = this.sidebarService.getAdminSidebarLinks();
   }
 }

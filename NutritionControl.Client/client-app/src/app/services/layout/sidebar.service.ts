@@ -6,11 +6,11 @@ import { Injectable } from '@angular/core';
 export class SidebarService {
 
   links = [
-    {
-      routerLink: "news",
-      text: "News",
-      icon: "fas fa-newspaper pb-1"
-    },
+    // {
+    //   routerLink: "news",
+    //   text: "News",
+    //   icon: "fas fa-newspaper pb-1"
+    // },
     {
       routerLink: "products",
       text: "Products",
@@ -22,15 +22,15 @@ export class SidebarService {
       icon: "fas fa-calculator pb-1"
     },
     {
-      routerLink: "",
+      routerLink: "products/favourite",
       text: "Favourite Products",
       icon: "fas fa-star pb-1"
     },
-    {
-      routerLink: "",
-      text: "Favourite Receipts",
-      icon: "fas fa-star pb-1"
-    },
+    // {
+    //   routerLink: "",
+    //   text: "Favourite Receipts",
+    //   icon: "fas fa-star pb-1"
+    // },
     {
       routerLink: "receipts",
       text: "Receipts",
@@ -43,10 +43,27 @@ export class SidebarService {
     }
   ]
 
+  adminLinks = [
+    {
+      routerLink: "categories",
+      text: "Categories",
+      icon: "fas fa-book pb-1"
+    },
+    {
+      routerLink: "products",
+      text: "Products",
+      icon: "fas fa-utensils pb-1"
+    }
+  ]
+
   constructor() { }
 
   getSidebarLinks(): Array<any> {
     return this.links;
+  }
+
+  getAdminSidebarLinks(): Array<any> {
+    return this.adminLinks;
   }
 
 }

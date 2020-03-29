@@ -3,6 +3,10 @@ import { ProductsCrudService } from '../../services/products-crud.service';
 import { ApiCollectionResponse, ApiResponse, ApiPaginationResponse } from 'src/app/models/apiResponse';
 import { ProductDto } from 'src/app/models/productDto';
 import { AlertifyService } from 'src/app/services/layout/alertify.service';
+import { CategoryDto } from 'src/app/models/categoryDto';
+import { CategoriesCrudService } from '../../services/categories-crud.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-products-crud',
@@ -30,17 +34,28 @@ export class ProductsCrudComponent implements OnInit {
     isLiked: false
   };
 
+  categories: Array<CategoryDto>;
+  selectedCategory: CategoryDto;
+
   constructor(private productsCrudService: ProductsCrudService,
+              private categoriesService: CategoriesCrudService,
               private alertifyService: AlertifyService) { }
 
   ngOnInit() {
     this.loadProducts(this.page);
+
+    this.categoriesService.getCategories().subscribe((res:ApiCollectionResponse)=> {
+      if(res.isSuccessful) {
+        this.categories = res.data;
+      }
+    })
   }
 
 
   onEdit(product: ProductDto) {
 
     if(this.editMode && this.selectedId == product.id) {
+      product.categoryName = this.selectedCategory.name;
       this.productsCrudService.editProduct(product).subscribe((res: ApiResponse) => {
         if(res.isSuccessful){
           this.alertifyService.success(res.message);
@@ -83,6 +98,7 @@ export class ProductsCrudComponent implements OnInit {
   }
 
   onAdd() {
+    this.newProduct.categoryName = this.selectedCategory.name;
     this.productsCrudService.addProduct(this.newProduct).subscribe((res: ApiResponse) => {
       if(res.isSuccessful){
         this.alertifyService.success("Product was added");
@@ -108,4 +124,11 @@ export class ProductsCrudComponent implements OnInit {
       }
     })
   }
+
+  searchProduct = (text$: Observable<string>) =>
+  text$.pipe(
+    map(term => term === '' ? [] :
+      this.categories.filter(p => p.name.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10)));
+
+formatter = (p: { name: string }) => p.name;
 }
